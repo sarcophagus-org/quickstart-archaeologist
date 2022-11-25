@@ -3,6 +3,7 @@ version: "3.8"
 services:
   archaeologist:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    network_mode: "host"
     restart: on-failure
     env_file:
       - ./.env
