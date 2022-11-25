@@ -13,21 +13,24 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 ### Initial Setup Instructions
 
-> Clone this repo:
-> 
-> git clone https://github.com/sarcophagus-org/quickstart-archaeologist
+1. Clone this repo:
 
-> Copy example env file, and fill out the ETH_PRIVATE_KEY and PROVIDER_URL fields.
->
-> `cp .env.example .env`
+   `git clone https://github.com/sarcophagus-org/quickstart-archaeologist`
 
-> Create blank peer ID file.
->
-> `touch peer-id.json`
 
-> Run the service:
->
-> `docker-compose up`
+2. Copy example env file, and fill out the ETH_PRIVATE_KEY and PROVIDER_URL fields.
+
+   `cp .env.example .env`
+
+
+3. Create blank peer ID file.
+
+   `touch peer-id.json`
+
+
+4. Run the service:
+
+   `docker-compose up`
 
 ---
 
