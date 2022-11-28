@@ -33,13 +33,21 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 4. Run the service:
 
-   `docker-compose up`  (or `docker compose up`)
+   `docker compose up`  (or `docker-compose` for older versions of docker compose)
 
 ---
 
 ### Registering your archaeologist
 If this is your first time running the service, you will be prompted to register your archaeologist.
 
-### Further instructions
-To start the service at any point after running the initial setup instructions, just use `docker-compose up`
+Follow the prompts to register your archaeologist.
 
+### CLI
+To run the CLI: 
+1. If the service is not started, start the service with `docker compose up`,
+2. Jump into the container with: `docker compose exec archaeologist sh`
+3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
+
+### Further instructions
+To update the service to the latest version, stop the service, pull the newest image and start the service with:
+`docker-compose pull && docker-compose up`
