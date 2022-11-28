@@ -32,8 +32,11 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 
 4. Run the service:
-
-   `docker compose up`  (or `docker-compose` for older versions of docker compose)
+   If you have not yet registered your archaeologist:
+   `docker compose run -rm archaeologist`  (or `docker-compose` for older versions of docker compose)
+   
+   If you have registered your archaeologist:
+   `docker compose up`
 
 ---
 
@@ -49,5 +52,5 @@ To run the CLI:
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
 ### Further instructions
-To update the service to the latest version, stop the service, pull the newest image and start the service with:
-`docker-compose pull && docker-compose up`
+To update the service to the latest version:
+`docker-compose pull`

@@ -17,6 +17,8 @@ services:
       - type: bind
         source: ./peer-id.json
         target: /home/node/app/peer-id.json
+    stdin_open: true
+    tty: true
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
