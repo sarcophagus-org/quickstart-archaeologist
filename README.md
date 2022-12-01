@@ -33,7 +33,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 4. Run the service:
    If you have not yet registered your archaeologist:
-   `docker compose run -rm archaeologist`  (or `docker-compose` for older versions of docker compose)
+   `docker compose run --rm archaeologist`  (or `docker-compose` for older versions of docker compose)
    
    If you have registered your archaeologist:
    `docker compose up`
