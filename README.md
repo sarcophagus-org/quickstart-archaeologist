@@ -31,9 +31,10 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
    `touch peer-id.json`
 
 
-4. Run the service:
-   If you have not yet registered your archaeologist:
-   `docker compose run -rm archaeologist`  (or `docker-compose` for older versions of docker compose)
+4. **If you have not yet registered your archaeologist:**
+   > `docker compose run -rm archaeologist`  
+   
+_(or `docker-compose` for older versions of docker compose)_
    
    If you have registered your archaeologist:
    `docker compose up`
