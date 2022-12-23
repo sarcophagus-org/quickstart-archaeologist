@@ -21,19 +21,21 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
    `git clone https://github.com/sarcophagus-org/quickstart-archaeologist`
 
 
-2. Copy example env file, and fill out the ETH_PRIVATE_KEY and PROVIDER_URL fields.
+2. Copy example env file, and fill out the env file values.
 
    `cp .env.example .env`
-
 
 3. Create blank peer ID file.
 
    `touch peer-id.json`
 
 4. **If you have not yet registered your archaeologist:**
-   > `docker compose run -rm archaeologist`  
+   > `COMPOSE_PROFILES=register docker compose run -rm register`  
    
 _(or `docker-compose` for older versions of docker compose)_
+
+5. Run the service
+   >  `COMPOSE_PROFILES=service docker compose up`
 
 ### Registering your archaeologist
 If this is your first time running the service, you will be prompted to register your archaeologist.

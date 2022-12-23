@@ -1,10 +1,10 @@
 version: "3.8"
 
 services:
-  archaeologist:
+  register:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
     network_mode: "host"
-    restart: on-failure
+    profiles: ["register"]
     env_file:
       - ./.env
     command:
@@ -12,7 +12,7 @@ services:
       - -c
       - |
         npm run peer-id-gen
-        NODE_NO_WARNINGS=1 npm run cli start
+        NODE_NO_WARNINGS=1 npm run cli register -g
     volumes:
       - type: bind
         source: ./peer-id.json
@@ -23,3 +23,55 @@ services:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
       CHAIN_ID: 5
+
+  archaeologist:
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    network_mode: "host"
+    profiles: ["service"]
+    restart: on-failure
+    env_file:
+      - ./.env
+    command:
+      - /bin/bash
+      - -c
+      - NODE_NO_WARNINGS=1 npm run cli start
+    volumes:
+      - type: bind
+        source: ./peer-id.json
+        target: /home/node/app/peer-id.json
+    stdin_open: true
+    tty: true
+    environment:
+      FORCE_COLOR: 1
+      NODE_NO_WARNINGS: 1
+      CHAIN_ID: 5
+      VIRTUAL_PORT: 9000
+      VIRTUAL_HOST: exampledomain.com
+      LETSENCRYPT_HOST: exampledomain.com
+      LETSENCRYPT_EMAIL: admin@exampledomain.com
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    profiles: ["service"]
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - "/etc/nginx/vhost.d"
+      - "/usr/share/nginx/html"
+      - "/etc/nginx/certs"
+    depends_on:
+      - archaeologist
+
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    profiles: ["service"]
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/etc/nginx/vhost.d"
+      - "/usr/share/nginx/html"
+      - "/etc/nginx/certs"
+    environment:
+      NGINX_PROXY_CONTAINER: "nginx-proxy"
