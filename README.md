@@ -44,6 +44,8 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
    > `COMPOSE_PROFILES=service docker compose up`
 
 ### CLI
+A CLI is provided for running additional commands for your service, such as updating profile values and claiming rewards.
+
 To run the CLI: 
 1. If the service is not started, start the service with `docker compose up`,
 2. Jump into the container with: `docker compose exec archaeologist sh`
