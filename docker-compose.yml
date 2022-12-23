@@ -46,9 +46,9 @@ services:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
       CHAIN_ID: 11155111
-      VIRTUAL_HOST: 
+      VIRTUAL_HOST: ${DOMAIN}
       VIRTUAL_PORT: 9000
-      LETSENCRYPT_HOST: 
+      LETSENCRYPT_HOST: ${DOMAIN}
     expose:
       - "9000"
     depends_on:
@@ -83,7 +83,6 @@ services:
       - acme:/etc/acme.sh
     environment:
       NGINX_PROXY_CONTAINER: "nginx-proxy"
-      DEFAULT_EMAIL: ""
     depends_on:
       - nginx-proxy
 
