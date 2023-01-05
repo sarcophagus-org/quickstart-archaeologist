@@ -39,18 +39,27 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 
    Follow the instructions to register your archaeologist. A peer ID will automatically be generated for you.
 
-5. Run the service
+5. Run the service in the background
 
-   > `COMPOSE_PROFILES=service docker compose up`
+   > `COMPOSE_PROFILES=service docker compose up -d`
+
+### Logging
+To view the logs
+
+Run `docker container ls` and grab the container ID of the archaeologist service
+
+Run `docker logs <container-id> --follow` to see realtime logs
 
 ### CLI
 A CLI is provided for running additional commands for your service, such as updating profile values and claiming rewards.
 
 To run the CLI: 
-1. If the service is not started, start the service with `docker compose up`,
+1. If the service is not started, start the service with `docker compose up -d`,
 2. Jump into the container with: `docker compose exec archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
-### Further instructions
+### Updating the service
 To update the service to the latest version:
-`docker-compose pull`
+`COMPOSE_PROFILES=service docker compose stop`
+`COMPOSE_PROFILES=service docker compose pull`
+`COMPOSE_PROFILES=service docker compose up -d`
