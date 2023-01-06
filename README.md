@@ -5,6 +5,7 @@
   - git
   - [docker (>= 20.0)](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
   - [docker compose (>= 2.0.0)](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
+  - Minimum requirements: 4GB hard drive space, 512MB RAM
   - An example of a server with these prerequisites already installed: [https://marketplace.digitalocean.com/apps/docker](https://marketplace.digitalocean.com/apps/docker)
 - ETH wallet (private key) with:
   - ETH balance (for signing transactions)
