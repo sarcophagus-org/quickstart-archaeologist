@@ -85,6 +85,17 @@ services:
       NGINX_PROXY_CONTAINER: "nginx-proxy"
     depends_on:
       - nginx-proxy
+  seed-gen:
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    profiles: [ "seed" ]
+    command:
+      - /bin/bash
+      - -c
+      - npm run seed-gen
+    stdin_open: true
+    tty: true
+    environment:
+      NODE_NO_WARNINGS: 1
 
 networks:
     service_network:

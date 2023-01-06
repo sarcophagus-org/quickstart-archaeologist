@@ -23,15 +23,18 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 
    `git clone https://github.com/sarcophagus-org/quickstart-archaeologist`
 
-2. Copy example env file, and fill out the env file values. See example env for explanation
+2. Copy example env file.
 
    `cp .env.example .env`
 
-3. Create blank peer ID file.
+3. Fill out the env file values.
+- To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+
+4. Create blank peer ID file.
 
    `touch peer-id.json`
 
-4. **If you have not yet registered your archaeologist:**
+5. **If you have not yet registered your archaeologist:**
 
    > `COMPOSE_PROFILES=register docker compose run register`  
    
@@ -39,7 +42,7 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 
    Follow the instructions to register your archaeologist. A peer ID will automatically be generated for you.
 
-5. Run the service in the background
+6. Run the service in the background
 
    > `COMPOSE_PROFILES=service docker compose up -d`
 
@@ -59,7 +62,9 @@ To run the CLI:
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
 ### Updating the service
-To update the service to the latest version:
-`COMPOSE_PROFILES=service docker compose stop`
-`COMPOSE_PROFILES=service docker compose pull`
-`COMPOSE_PROFILES=service docker compose up -d`
+To update the service to the latest version:<br>
+```
+COMPOSE_PROFILES=service docker compose stop
+COMPOSE_PROFILES=service docker compose pull
+COMPOSE_PROFILES=service docker compose up -d
+```
