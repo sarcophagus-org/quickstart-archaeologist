@@ -43,9 +43,19 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 
    Follow the instructions to register your archaeologist. A peer ID will automatically be generated for you.
 
+   ---
+   
+   **Notes on Registration:**
+   - It is recommended you set your free bond to at least a 10x multiple of your digging fee. (I.e. if `MIN_DIGGING_FEE=5`, set your `FREE_BOND` to at least `50`.
+   - When your free bond drops below your minimum digging fee, you will no longer be able to accept new jobs or appear in the embalmer web application list.
+   - See CLI instructions for updating these values after registration.
+
 6. Run the service in the background
 
    > `COMPOSE_PROFILES=service docker compose up -d`
+   
+7. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
+- Please allow up to a minute for the archaeologist list to populate.
 
 ### Logging
 To view the logs
@@ -61,6 +71,28 @@ To run the CLI:
 1. If the service is not started, start the service with `docker compose up -d`,
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
+
+##### Example
+**Update Digging Fee to 5**
+```
+docker compose exec -it archaeologist sh
+cli update -d 5
+exit
+```
+
+**Deposit 100 SARCO to free bond**
+```
+docker compose exec -it archaeologist sh
+cli update -f 100
+exit
+```
+
+**View Profile**
+```
+docker compose exec -it archaeologist sh
+cli view -p
+exit
+```
 
 ### Updating the service
 To update the service to the latest version:<br>
