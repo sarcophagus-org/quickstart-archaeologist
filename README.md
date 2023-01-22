@@ -101,3 +101,23 @@ COMPOSE_PROFILES=service docker compose stop
 COMPOSE_PROFILES=service docker compose pull
 COMPOSE_PROFILES=service docker compose up -d
 ```
+
+### Troubleshooting
+Below are some answers to common problems when setting up the service.
+
+**I registered the archaeologist, but it is not showing in the web application**
+1. Make sure your free bond is larger than your minimum digging fee. You will not show up in the web application if you do not have enough free bond posted to accept new jobs.
+2. Ensure your domain is pointed at the IP address of your server using: https://www.nslookup.io/website-to-ip-lookup
+3. See if any errors appear in the logs of either your archaeologist service, or the SSL service
+
+```
+**Archaeologist Logs**
+docker container ls   // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+docker logs <container_id>
+```
+
+```
+**SSL cert logs**
+docker container ls   // get container ID of nginxproxy/acme-companion
+docker logs <container_id>
+```
