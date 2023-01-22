@@ -103,12 +103,33 @@ COMPOSE_PROFILES=service docker compose up -d
 ```
 
 ### Troubleshooting
-Below are some answers to common problems when setting up the service.
+Below are some things to do to ensure your archaeologist is running correctly.
 
-**I registered the archaeologist, but it is not showing in the web application**
-1. Make sure your free bond is larger than your minimum digging fee. You will not show up in the web application if you do not have enough free bond posted to accept new jobs.
-2. Ensure your domain is pointed at the IP address of your server using: https://www.nslookup.io/website-to-ip-lookup
-3. See if any errors appear in the logs of either your archaeologist service, or the SSL service
+#### Test Websocket Connection
+https://www.piesocket.com/websocket-tester
+
+Test that your archaeologist can have websocket connection open by entering your websocket address in this format:
+
+wss://<domain>/p2p/<libp2p peerID>
+
+To get your domain and peerID, run:
+
+```
+docker compose exec -it archaeologist sh
+cli view -p
+```
+
+The `PeerId` has the domain and libp2p peerID concatenated with a `:`. So the format is: `<domain>:<peerID>`.
+
+An example would look like:
+`wss://wss.encryptafile.com/p2p/12D3KooWNpTFhjxvvKhzi6AiKk7ByroGpQ8YKXAy85oLJnrfjCst`
+
+
+#### Archaeologist not showing in the web application
+1. Ensure you have registered your archaeologist. 
+2. Make sure your free bond is larger than your minimum digging fee. You will not show up in the web application if you do not have enough free bond posted to accept new jobs.
+3. Ensure your domain is pointed at the IP address of your server using: https://www.nslookup.io/website-to-ip-lookup
+4. See if any errors appear in the logs of either your archaeologist service, or the SSL service
 
 ```
 **Archaeologist Logs**
