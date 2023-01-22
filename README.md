@@ -59,7 +59,7 @@ A CLI is provided for running additional commands for your service, such as upda
 
 To run the CLI: 
 1. If the service is not started, start the service with `docker compose up -d`,
-2. Jump into the container with: `docker compose exec archaeologist sh`
+2. Jump into the container with: `docker compose exec -it archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
 ### Updating the service
