@@ -105,6 +105,20 @@ COMPOSE_PROFILES=service docker compose up -d
 ### Troubleshooting
 Below are some things to do to ensure your archaeologist is running correctly.
 
+#### Updating your domain
+If you update your domain after registering, you will need to update the archaeologist profile and restart your service.
+
+```
+// Update the archaeologist by depositing 1 free bond
+docker compose exec -it archaeologist sh
+cli update -f 1
+exit
+
+// restart archaeologist service
+COMPOSE_PROFILES=service docker compose stop
+COMPOSE_PROFILES=service docker compose up -d
+```
+
 #### Test Websocket Connection
 https://www.piesocket.com/websocket-tester
 
