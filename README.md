@@ -138,7 +138,7 @@ https://www.piesocket.com/websocket-tester
 
 Test that your archaeologist can have websocket connection open by entering your websocket address in this format:
 
-wss://<domain>/p2p/<libp2p peerID>
+`wss://<domain>/p2p/<libp2p peerID>`
 
 To get your domain and peerID, run:
 
