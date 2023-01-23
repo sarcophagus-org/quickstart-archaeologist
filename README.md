@@ -119,19 +119,12 @@ COMPOSE_PROFILES=service docker compose up -d
 ## Troubleshooting
 Below are some things to do to ensure your archaeologist is running correctly.
 
-### Updating your domain
-If you update your domain after registering, you will need to update the archaeologist profile and restart your service.
+### Domain A Record
+Your domain must have an A record pointing at the IP address of your server that the archaeologist service is running on.
 
-```
-// Update the archaeologist by depositing 1 free bond
-docker compose exec -it archaeologist sh
-cli update -f 1
-exit
+https://www.nslookup.io/website-to-ip-lookup
 
-// restart archaeologist service
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose up -d
-```
+Use this tool to confirm that your domain is pointed correctly.
 
 ### Test Websocket Connection
 https://www.piesocket.com/websocket-tester
@@ -154,9 +147,9 @@ An example would look like:
 
 
 ### Archaeologist not showing in the web application
-1. Ensure you have registered your archaeologist. 
+1. Ensure you have registered your archaeologist (see setup instructions). 
 2. Make sure your free bond is larger than your minimum digging fee. You will not show up in the web application if you do not have enough free bond posted to accept new jobs.
-3. Ensure your domain is pointed at the IP address of your server using: https://www.nslookup.io/website-to-ip-lookup
+3. Ensure your domain is pointed at the IP address of your server using: 
 4. See if any errors appear in the logs of either your archaeologist service, or the SSL service
 
 ```
@@ -169,4 +162,18 @@ docker logs <container_id>
 **SSL cert logs**
 docker container ls   // get container ID of nginxproxy/acme-companion
 docker logs <container_id>
+```
+
+### Updating your domain after registering
+If you update your domain after registering, you will need to update the archaeologist profile and restart your service.
+
+```
+// Update the archaeologist by depositing 1 free bond
+docker compose exec -it archaeologist sh
+cli update -f 1
+exit
+
+// restart archaeologist service
+COMPOSE_PROFILES=service docker compose stop
+COMPOSE_PROFILES=service docker compose up -d
 ```
