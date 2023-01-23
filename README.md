@@ -1,6 +1,13 @@
-## Setup Instructions
 
-### Prerequisites:
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Setup Instructions](#setup-instructions)
+3. [Logging](#logging)
+4. [CLI](#cli)
+5. [Updating the service](#updating-the-service)
+6. [Troubleshooting](#troubleshooting)
+
+## Prerequisites:
 - Running a server with the following installed:
   - git
   - [docker (>= 20.0)](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
@@ -18,7 +25,7 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 - A registered domain name [pointed at your server's ip address](https://www.servers.com/support/knowledge/dedicated-servers/how-to-point-your-domain-name-to-dedicated-servers-ip-address#:~:text=To%20point%20your%20domain%20name%20to%20your%20dedicated%20server's%20public,on%20the%20domain's%20name%20servers.) 
 ---
 
-### Initial Setup Instructions
+## Setup Instructions
 
 1. Clone this repo:
 
@@ -57,14 +64,14 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 7. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
 - Please allow up to a minute for the archaeologist list to populate.
 
-### Logging
+## Logging
 To view the logs
 
 Run `docker container ls` and grab the container ID of the archaeologist service
 
 Run `docker logs <container-id> --follow` to see realtime logs
 
-### CLI
+## CLI
 A CLI is provided for running additional commands for your service, such as updating profile values and claiming rewards.
 
 To run the CLI: 
@@ -72,7 +79,7 @@ To run the CLI:
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
-##### Example
+#### Examples
 **Update Digging Fee to 5**
 ```
 docker compose exec -it archaeologist sh
@@ -94,6 +101,13 @@ cli view -p
 exit
 ```
 
+**Claim Rewards**
+```
+docker compose exec -it archaeologist sh
+cli claim
+exit
+```
+
 ### Updating the service
 To update the service to the latest version:<br>
 ```
@@ -102,10 +116,10 @@ COMPOSE_PROFILES=service docker compose pull
 COMPOSE_PROFILES=service docker compose up -d
 ```
 
-### Troubleshooting
+## Troubleshooting
 Below are some things to do to ensure your archaeologist is running correctly.
 
-#### Updating your domain
+### Updating your domain
 If you update your domain after registering, you will need to update the archaeologist profile and restart your service.
 
 ```
@@ -119,7 +133,7 @@ COMPOSE_PROFILES=service docker compose stop
 COMPOSE_PROFILES=service docker compose up -d
 ```
 
-#### Test Websocket Connection
+### Test Websocket Connection
 https://www.piesocket.com/websocket-tester
 
 Test that your archaeologist can have websocket connection open by entering your websocket address in this format:
@@ -139,7 +153,7 @@ An example would look like:
 `wss://wss.encryptafile.com/p2p/12D3KooWNpTFhjxvvKhzi6AiKk7ByroGpQ8YKXAy85oLJnrfjCst`
 
 
-#### Archaeologist not showing in the web application
+### Archaeologist not showing in the web application
 1. Ensure you have registered your archaeologist. 
 2. Make sure your free bond is larger than your minimum digging fee. You will not show up in the web application if you do not have enough free bond posted to accept new jobs.
 3. Ensure your domain is pointed at the IP address of your server using: https://www.nslookup.io/website-to-ip-lookup
