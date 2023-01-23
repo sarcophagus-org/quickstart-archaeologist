@@ -5,7 +5,8 @@
 3. [Logging](#logging)
 4. [CLI](#cli)
 5. [Updating the service](#updating-the-service)
-6. [Troubleshooting](#troubleshooting)
+6. [Restarting the service](#restarting-the-service)
+7. [Troubleshooting](#troubleshooting)
 
 ## Prerequisites:
 - Running a server with the following installed:
@@ -113,6 +114,13 @@ To update the service to the latest version:<br>
 ```
 COMPOSE_PROFILES=service docker compose stop
 COMPOSE_PROFILES=service docker compose pull
+COMPOSE_PROFILES=service docker compose up -d
+```
+
+### Restarting the service
+To restart the service:<br>
+```
+COMPOSE_PROFILES=service docker compose stop
 COMPOSE_PROFILES=service docker compose up -d
 ```
 
