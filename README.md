@@ -18,10 +18,10 @@
 - ETH wallet (private key) with:
   - ETH balance (for signing transactions)
   - SARCO balance (for bonding your archaeologist to curses)
-- BIP39 compatible mnemonic (generate a new one here: [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/))
+- BIP39 compatible mnemonic (see **Setup Instructions** or generate a new one here: [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/))
 - RPC URL (Infura, Alchemy, etc.)
 
-_If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you will need Goerli/Sepolia ETH + Goerli/Sepolia SARCO._
+_If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SARCO._
 
 - A registered domain name [pointed at your server's ip address](https://www.servers.com/support/knowledge/dedicated-servers/how-to-point-your-domain-name-to-dedicated-servers-ip-address#:~:text=To%20point%20your%20domain%20name%20to%20your%20dedicated%20server's%20public,on%20the%20domain's%20name%20servers.) 
 ---
@@ -38,6 +38,7 @@ _If running on Goerli (chain id = 5) or Sepolia (chain id = 11155111), then you 
 
 3. Fill out the env file values.
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+- Copy this value to your env file
 
 4. Create blank peer ID file.
 
