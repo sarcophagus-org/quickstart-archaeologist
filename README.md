@@ -82,8 +82,10 @@ To run the CLI:
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
 #### Examples
-**Update Digging Fee to 5 SARCO**
+**Update Profile**
 ```
+// change profile to have digging fee of 5
+// this will also update your domain + peerID automatically
 docker compose exec -it archaeologist sh
 cli update -d 5
 exit
