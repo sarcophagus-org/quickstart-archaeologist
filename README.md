@@ -30,7 +30,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 1. Clone this repo:
 
-   `git clone https://github.com/sarcophagus-org/quickstart-archaeologist`
+   `git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
 
 2. Copy example env file.
 
