@@ -15,6 +15,7 @@
   - [docker compose (>= 2.0.0)](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
   - Minimum requirements: 4GB hard drive space, 512MB RAM
   - An example of a server with these prerequisites already installed: [https://marketplace.digitalocean.com/apps/docker](https://marketplace.digitalocean.com/apps/docker)
+  - **Note:** Server must have ports 80 and 443 open
 - ETH wallet (private key) with:
   - ETH balance (for signing transactions)
   - SARCO balance (for bonding your archaeologist to curses)
@@ -136,6 +137,14 @@ COMPOSE_PROFILES=service docker compose up -d
 
 ## Troubleshooting
 Below are some things to do to ensure your archaeologist is running correctly.
+
+### Server ports
+Ports 443 and 80 must be open on your server.
+
+If using Uncomplicated Firewall on linux, you can use the following to open these ports:
+```
+sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable
+```
 
 ### Domain A Record
 Your domain must have an A record pointing at the IP address of your server that the archaeologist service is running on.
