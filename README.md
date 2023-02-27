@@ -85,10 +85,9 @@ To run the CLI:
 #### Examples
 **Update Profile**
 ```
-// change profile to have digging fee of 5
-// this will also update your domain + peerID automatically
+// this will update your domain + peerID automatically
 docker compose exec -it archaeologist sh
-cli update -d 5
+cli update -u
 exit
 ```
 
