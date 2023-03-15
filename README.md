@@ -76,7 +76,7 @@ Run `docker logs <container-id> --follow` to see realtime logs
 
 Run `docker logs <container-id> --since 12h` to view logs over the last 12 hours. 
 
-Replace as needed to filter logs over more or less time. E.g. - `30m` for 30 minutes.
+Replace `12h` as needed to filter logs over more or less time. E.g. - `30m` for 30 minutes.
 
 ### Access file logs
 The container is confugured to log all output to a file, located at `path/to/file.txt`.
