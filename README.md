@@ -64,7 +64,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
    > `COMPOSE_PROFILES=service docker compose up -d`
    
-7. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
+7. You can verify your service is registered correctly by visiting https://app.dev.sarcophagus.io/dashboard
 - Please allow up to a minute for the archaeologist list to populate.
 
 ## Logging
