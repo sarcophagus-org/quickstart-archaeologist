@@ -38,16 +38,20 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
    `cp .env.example .env`
 
 3. Fill out the env file values.
-- To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+    
+- To generate a BIP39 mnemonic seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+  - You may use this newly generated mnemonic for the `ENCRYPTION_MNEMONIC`
+
+   `nano .env`
 - Copy this value to your env file
 
 4. Create blank peer ID file.
 
    `touch peer-id.json`
 
-5. **If you have not yet registered your archaeologist:**
+5. To register your archaeologist.
 
-   > `COMPOSE_PROFILES=register docker compose run register`  
+   `COMPOSE_PROFILES=register docker compose run register`  
    
    _(or `docker-compose` for older versions of docker compose)_
 
@@ -62,7 +66,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 6. Run the service in the background
 
-   > `COMPOSE_PROFILES=service docker compose up -d`
+   `COMPOSE_PROFILES=service docker compose up -d`
    
 7. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
 - Please allow up to a minute for the archaeologist list to populate.
@@ -84,55 +88,63 @@ To run the CLI:
 
 #### Examples
 **Update Profile**
-```
-// this will update your domain + peerID automatically
-docker compose exec -it archaeologist sh
-cli update -u
-exit
-```
+
+##### this will update your domain + peerID automatically
+
+`docker compose exec -it archaeologist sh`
+
+`cli update -u`
+
+`exit`
 
 **Deposit 100 SARCO to free bond**
-```
-docker compose exec -it archaeologist sh
-cli update -f 100
-exit
-```
+
+`docker compose exec -it archaeologist sh`
+
+`cli update -f 100`
+
+`exit`
 
 **View Profile**
-```
-docker compose exec -it archaeologist sh
-cli view -p
-exit
-```
+
+`docker compose exec -it archaeologist sh`
+
+`cli view -p`
+
+`exit`
 
 **Claim Rewards**
-```
-docker compose exec -it archaeologist sh
-cli claim
-exit
-```
+
+
+`docker compose exec -it archaeologist sh`
+
+`cli claim`
+
+`exit`
 
 **Withdraw 5 SARCO from Free Bond**
-```
-docker compose exec -it archaeologist sh
-cli free-bond -w 5
-exit
-```
+
+`docker compose exec -it archaeologist sh`
+
+`cli free-bond -w 5`
+
+`exit`
 
 ### Updating the service
 To update the service to the latest version:<br>
-```
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose pull
-COMPOSE_PROFILES=service docker compose up -d
-```
+
+`COMPOSE_PROFILES=service docker compose stop`
+
+`COMPOSE_PROFILES=service docker compose pull`
+
+`COMPOSE_PROFILES=service docker compose up -d`
 
 ### Restarting the service
 To restart the service:<br>
-```
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose up -d
-```
+
+`COMPOSE_PROFILES=service docker compose stop`
+
+`COMPOSE_PROFILES=service docker compose up -d`
 
 ## Troubleshooting
 Below are some things to do to ensure your archaeologist is running correctly.
@@ -161,10 +173,9 @@ Test that your archaeologist can have websocket connection open by entering your
 
 To get your domain and peerID, run:
 
-```
-docker compose exec -it archaeologist sh
-cli view -p
-```
+`docker compose exec -it archaeologist sh`
+
+`cli view -p`
 
 The `PeerId` has the domain and libp2p peerID concatenated with a `:`. So the format is: `<domain>:<peerID>`.
 
@@ -178,28 +189,34 @@ An example would look like:
 3. Ensure your domain is pointed at the IP address of your server using: 
 4. See if any errors appear in the logs of either your archaeologist service, or the SSL service
 
-```
-**Archaeologist Logs**
-docker container ls   // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
-docker logs <container_id>
-```
 
-```
+**Archaeologist Logs**
+
+`docker container ls`   // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+
+`docker logs <container_id>`
+
+
 **SSL cert logs**
-docker container ls   // get container ID of nginxproxy/acme-companion
-docker logs <container_id>
-```
+
+`docker container ls`   // get container ID of nginxproxy/acme-companion
+
+`docker logs <container_id>`
 
 ### Updating your domain after registering
 If you update your domain after registering, you will need to update the archaeologist profile and restart your service.
 
-```
-// Update the archaeologist by depositing 1 free bond
-docker compose exec -it archaeologist sh
-cli update -f 1
-exit
 
-// restart archaeologist service
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose up -d
-```
+#### Update the archaeologist by depositing 1 free bond
+
+`docker compose exec -it archaeologist sh`
+
+`cli update -f 1`
+
+`exit`
+
+#### restart archaeologist service
+
+`COMPOSE_PROFILES=service docker compose stop`
+
+`COMPOSE_PROFILES=service docker compose up -d`
