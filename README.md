@@ -78,12 +78,6 @@ Run `docker logs <container-id> --since 12h` to view logs over the last 12 hours
 
 Replace `12h` as needed to filter logs over more or less time. E.g. - `30m` for 30 minutes.
 
-### Access file logs
-The container is confugured to log all output to a file, located at `path/to/file.txt`.
-This way you can access logs even from containers you have shut down in the past.
-
-[file rotation guide TBD]
-
 
 ## CLI
 A CLI is provided for running additional commands for your service, such as updating profile values and claiming rewards.
