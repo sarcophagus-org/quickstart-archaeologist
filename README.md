@@ -74,6 +74,8 @@ Run `docker container ls` and grab the container ID of the archaeologist service
 
 Run `docker logs <container-id> --follow` to see realtime logs
 
+OR
+
 Run `docker logs <container-id> --since 12h` to view logs over the last 12 hours. 
 
 Replace `12h` as needed to filter logs over more or less time. E.g. - `30m` for 30 minutes.
