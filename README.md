@@ -68,11 +68,21 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 - Please allow up to a minute for the archaeologist list to populate.
 
 ## Logging
-To view the logs
+- ### To view the logs
 
 Run `docker container ls` and grab the container ID of the archaeologist service
 
 Run `docker logs <container-id> --follow` to see realtime logs
+
+- ### To log to a file
+
+Run `docker logs <container-id> --since 12h &> logs.txt`
+
+`12h` above indicates that all logs over the past 12 hours will be copied into `logs.txt`. Replace as needed to filter logs over more or less time.
+ E.g. - `30m` for 30 minutes.
+
+Run `cat logs.txt` to output the content of the log file.
+
 
 ## CLI
 A CLI is provided for running additional commands for your service, such as updating profile values and claiming rewards.
