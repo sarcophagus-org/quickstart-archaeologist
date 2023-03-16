@@ -59,7 +59,6 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     profiles: ["service"]
-    restart: on-failure
     networks: 
       service_network:
     ports:
@@ -74,7 +73,6 @@ services:
   acme-companion:
     image: nginxproxy/acme-companion
     profiles: ["service"]
-    restart: on-failure
     networks:
       service_network:
     volumes:
