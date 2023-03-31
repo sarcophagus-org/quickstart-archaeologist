@@ -162,7 +162,6 @@ COMPOSE_PROFILES=service docker compose up -d
 
 
 
-## Setup Instructions Windows
 
 ## Prerequisites Windows: 
 - Git Bash for Windows CLI- https://gitforwindows.org/
@@ -179,7 +178,7 @@ COMPOSE_PROFILES=service docker compose up -d
 - BIP39 compatible mnemonic (see **Setup Instructions** or generate a new one here: [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/))
 - RPC URL (Infura, Alchemy, etc.)
 
-##Setup Instructions
+## Setup Instructions Windows
 
 1. Once your VPS is setup, and you have Gitbash installed, connect to your droplet using the gitbash CLI:
 
