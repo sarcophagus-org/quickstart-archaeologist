@@ -16,9 +16,11 @@ Windows OS
 8. [Setup Instructions for Windows](#setup-instructions-windows)
 9. [CLI for Windows](#cli-windows)
 10. [Operations for Windows](#operations-windows)
+
+
 11. [Troubleshooting](#troubleshooting) (Any OS)
 
-##Linux OS
+####Linux OS
 
 ## Prerequisites:
 - Running a server with the following installed:
