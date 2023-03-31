@@ -20,7 +20,9 @@ Windows OS
 
 11. [Troubleshooting](#troubleshooting) (Any OS)
 
-####Linux OS
+
+
+##Linux OS
 
 ## Prerequisites:
 - Running a server with the following installed:
