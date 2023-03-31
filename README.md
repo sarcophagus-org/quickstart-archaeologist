@@ -20,14 +20,14 @@ Windows OS
 
 Any OS
 
-11. [Troubleshooting](#troubleshooting) 
+12. [Troubleshooting](#troubleshooting) 
 
 
 
 ##Linux OS
 
 
-## Prerequisites:
+# Prerequisites:
 - Running a server with the following installed:
   - git
   - [docker (>= 20.0)](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
