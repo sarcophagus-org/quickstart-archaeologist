@@ -1,20 +1,21 @@
 
 ## Table of Contents
-###Linux OS
+##Linux OS
 1. [Prerequisites](#prerequisites)
 2. [Setup Instructions Linux](#setup-instructions-linux)
 3. [Logging](#logging)
 4. [CLI](#cli)
 5. [Updating the service](#updating-the-service)
 6. [Restarting the service](#restarting-the-service)
-###Windows OS
+
+##Windows OS
 7. [Prerequisites for Windows](#prerequisites-windows)
 8. [Setup Instructions for Windows](#setup-instructions-windows)
 9. [CLI for Windows](#cli-windows)
 10. [Operations for Windows](#operations-windows)
-. [Troubleshooting](#troubleshooting) (Any OS)
+11. [Troubleshooting](#troubleshooting) (Any OS)
 
-###Linux OS
+##Linux OS
 
 ## Prerequisites:
 - Running a server with the following installed:
@@ -234,52 +235,47 @@ To run the CLI:
 **Update Profile**
 ```
 // this will update your domain + peerID automatically
-docker compose exec -it archaeologist sh
-cli update -u
-exit
+docker container ls
+docker exec >container id< -cli update -u
 ```
 
 **Deposit 100 SARCO to free bond**
 ```
-docker compose exec -it archaeologist sh
-cli update -f 100
-exit
+docker container ls
+docker exec >container id< cli update -f 100
 ```
 
 **View Profile**
 ```
-docker compose exec -it archaeologist sh
-cli view -p
-exit
+docker container ls
+docker exec >container id< cli view -p
 ```
 
 **Claim Rewards**
 ```
-docker compose exec -it archaeologist sh
-cli claim
-exit
+docker container ls
+docker exec >container id< cli claim
 ```
 
 **Withdraw 5 SARCO from Free Bond**
 ```
-docker compose exec -it archaeologist sh
-cli free-bond -w 5
-exit
+docker container ls
+docker exec >container id< cli free-bond -w 5
 ```
 
 ### Updating the service
 To update the service to the latest version:<br>
 ```
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose pull
-COMPOSE_PROFILES=service docker compose up -d
+COMPOSE_PROFILES=service docker-compose stop
+COMPOSE_PROFILES=service docker-compose pull
+COMPOSE_PROFILES=service docker-compose up -d
 ```
 
 ### Restarting the service
 To restart the service:<br>
 ```
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose up -d
+COMPOSE_PROFILES=service docker-compose stop
+COMPOSE_PROFILES=service docker-compose up -d
 ```
 
 
