@@ -1,12 +1,20 @@
 
 ## Table of Contents
+###Linux OS
 1. [Prerequisites](#prerequisites)
-2. [Setup Instructions](#setup-instructions)
+2. [Setup Instructions Linux](#setup-instructions-linux)
 3. [Logging](#logging)
 4. [CLI](#cli)
 5. [Updating the service](#updating-the-service)
 6. [Restarting the service](#restarting-the-service)
-7. [Troubleshooting](#troubleshooting)
+###Windows OS
+7. [Prerequisites for Windows](#prerequisites-windows)
+8. [Setup Instructions for Windows](#setup-instructions-windows)
+9. [CLI for Windows](#cli-windows)
+10. [Operations for Windows](#operations-windows)
+. [Troubleshooting](#troubleshooting) (Any OS)
+
+###Linux OS
 
 ## Prerequisites:
 - Running a server with the following installed:
@@ -27,7 +35,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 - A registered domain name [pointed at your server's ip address](https://www.servers.com/support/knowledge/dedicated-servers/how-to-point-your-domain-name-to-dedicated-servers-ip-address#:~:text=To%20point%20your%20domain%20name%20to%20your%20dedicated%20server's%20public,on%20the%20domain's%20name%20servers.) 
 ---
 
-## Setup Instructions
+## Setup Instructions Linux
 
 1. Clone this repo:
 
@@ -38,6 +46,10 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
    `cp .env.example .env`
 
 3. Fill out the env file values.
+
+  'nano .env' *warning: do not alter the name of the file or it will not be recognized*
+  
+  or
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
 - Copy this value to your env file
 
@@ -140,6 +152,136 @@ To restart the service:<br>
 COMPOSE_PROFILES=service docker compose stop
 COMPOSE_PROFILES=service docker compose up -d
 ```
+
+
+
+## Setup Instructions Windows
+
+## Prerequisites Windows: 
+- Git Bash for Windows CLI- https://gitforwindows.org/
+- Running a server(VPS) with the following installed:
+  - git
+  - [docker (>= 20.0)](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
+  - [docker-compose (>= 2.0.0)](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
+  - Minimum requirements: 4GB hard drive space, 512MB RAM
+  - An example of a server with these prerequisites already installed: [https://marketplace.digitalocean.com/apps/docker](https://marketplace.digitalocean.com/apps/docker)
+  - **Note:** Server must have ports 80 and 443 open
+- ETH wallet (private key) with:
+  - ETH balance (for signing transactions)
+  - SARCO balance (for bonding your archaeologist to curses)
+- BIP39 compatible mnemonic (see **Setup Instructions** or generate a new one here: [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/))
+- RPC URL (Infura, Alchemy, etc.)
+
+##Setup Instructions
+
+1. Once your VPS is setup, and you have Gitbash installed, connect to your droplet using the gitbash CLI:
+
+  'ssh root@>droplet-ip<'
+  
+2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
+ 
+3. Once setup is complete, Clone this repo:
+
+   `git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
+
+4. Copy example env file.
+
+   `cp .env.example .env`
+
+5. Fill out the env file values.
+
+  'nano .env' *warning: do not alter the name of the file or it will not be recognized*
+  
+  or
+- To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+- Copy this value to your env file
+
+6. Create blank peer ID file.
+
+   `touch peer-id.json`
+
+7. **If you have not yet registered your archaeologist:**
+
+   > `COMPOSE_PROFILES=register docker-compose run register`  
+   
+   _(or `docker-compose` for older versions of docker compose)_
+
+   Follow the instructions to register your archaeologist. A peer ID will automatically be generated for you.
+
+   ---
+   
+   **Notes on Registration:**
+   - It is recommended you set your free bond to at least a 10x multiple of your digging fee. (I.e. if `MIN_DIGGING_FEE=5`, set your `FREE_BOND` to at least `50`.
+   - When your free bond drops below your minimum digging fee, you will no longer be able to accept new jobs or appear in the embalmer web application list.
+   - See CLI instructions for updating these values after registration.
+
+8. Run the service in the background
+
+   > `COMPOSE_PROFILES=service docker-compose up -d`
+   
+9. You can verify your service is registered correctly by visiting https://app.dev.sarcophagus.io/archaeologists
+- Please allow up to a minute for the archaeologist list to populate.
+
+## CLI Windows
+A CLI is provided for running additional commands for your service, such as updating profile values and claiming rewards.
+
+To run the CLI: 
+1. If the service is not started, start the service with `docker compose up -d`,
+2. Jump into the container with: `docker compose exec -it archaeologist sh`
+3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
+
+#### Operations Windows
+**Update Profile**
+```
+// this will update your domain + peerID automatically
+docker compose exec -it archaeologist sh
+cli update -u
+exit
+```
+
+**Deposit 100 SARCO to free bond**
+```
+docker compose exec -it archaeologist sh
+cli update -f 100
+exit
+```
+
+**View Profile**
+```
+docker compose exec -it archaeologist sh
+cli view -p
+exit
+```
+
+**Claim Rewards**
+```
+docker compose exec -it archaeologist sh
+cli claim
+exit
+```
+
+**Withdraw 5 SARCO from Free Bond**
+```
+docker compose exec -it archaeologist sh
+cli free-bond -w 5
+exit
+```
+
+### Updating the service
+To update the service to the latest version:<br>
+```
+COMPOSE_PROFILES=service docker compose stop
+COMPOSE_PROFILES=service docker compose pull
+COMPOSE_PROFILES=service docker compose up -d
+```
+
+### Restarting the service
+To restart the service:<br>
+```
+COMPOSE_PROFILES=service docker compose stop
+COMPOSE_PROFILES=service docker compose up -d
+```
+
 
 ## Troubleshooting
 Below are some things to do to ensure your archaeologist is running correctly.
