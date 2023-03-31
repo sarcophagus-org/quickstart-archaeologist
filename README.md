@@ -3,7 +3,7 @@
 
 Linux OS
 
-1. [Prerequisites](#prerequisites)
+1. [Prerequisites for Linux](#prerequisites-linux)
 2. [Setup Instructions Linux](#setup-instructions-linux)
 3. [Logging](#logging)
 4. [CLI](#cli)
@@ -23,11 +23,7 @@ Any OS
 12. [Troubleshooting](#troubleshooting) 
 
 
-
-##Linux OS
-
-
-# Prerequisites:
+# Prerequisites Linux:
 - Running a server with the following installed:
   - git
   - [docker (>= 20.0)](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
