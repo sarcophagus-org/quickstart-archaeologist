@@ -1,6 +1,8 @@
 
 ## Table of Contents
-##Linux OS
+
+Linux OS
+
 1. [Prerequisites](#prerequisites)
 2. [Setup Instructions Linux](#setup-instructions-linux)
 3. [Logging](#logging)
@@ -8,7 +10,8 @@
 5. [Updating the service](#updating-the-service)
 6. [Restarting the service](#restarting-the-service)
 
-##Windows OS
+Windows OS
+
 7. [Prerequisites for Windows](#prerequisites-windows)
 8. [Setup Instructions for Windows](#setup-instructions-windows)
 9. [CLI for Windows](#cli-windows)
