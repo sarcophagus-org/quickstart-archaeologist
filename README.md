@@ -14,8 +14,9 @@ Windows OS
 
 7. [Prerequisites for Windows](#prerequisites-windows)
 8. [Setup Instructions for Windows](#setup-instructions-windows)
-9. [CLI for Windows](#cli-windows)
-10. [Operations for Windows](#operations-windows)
+9. [Logging for Windows](#logging-windows)
+10. [CLI for Windows](#cli-windows)
+11. [Operations for Windows](#operations-windows)
 
 Any OS
 
