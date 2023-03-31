@@ -199,7 +199,7 @@ COMPOSE_PROFILES=service docker compose up -d
   `nano.env`
   
   or
-- To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+- To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker-compose run seed-gen`
 - Copy this value to your env file
 
 6. Create blank peer ID file.
@@ -209,8 +209,7 @@ COMPOSE_PROFILES=service docker compose up -d
 7. **If you have not yet registered your archaeologist:**
 
    > `COMPOSE_PROFILES=register docker-compose run register`  
-   
-   _(or `docker-compose` for older versions of docker compose)_
+
 
    Follow the instructions to register your archaeologist. A peer ID will automatically be generated for you.
 
