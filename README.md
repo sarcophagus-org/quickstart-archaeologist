@@ -17,12 +17,14 @@ Windows OS
 9. [CLI for Windows](#cli-windows)
 10. [Operations for Windows](#operations-windows)
 
+Any OS
 
-11. [Troubleshooting](#troubleshooting) (Any OS)
+11. [Troubleshooting](#troubleshooting) 
 
 
 
 ##Linux OS
+
 
 ## Prerequisites:
 - Running a server with the following installed:
