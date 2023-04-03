@@ -329,12 +329,14 @@ An example would look like:
 
 **Archaeologist Logs**
 `docker container ls`   // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+
 `docker logs <container_id>`
 
 
 
 **SSL cert logs**
 `docker container ls`   // get container ID of nginxproxy/acme-companion
+
 `docker logs <container_id>`
 
 
@@ -344,10 +346,13 @@ If you update your domain after registering, you will need to update the archaeo
 
 **Update the archaeologist by depositing 1 free bond
 `docker compose exec -it archaeologist sh`
+
 `cli update -f 1`
+
 `exit`
 
 Restart archaeologist service
 `COMPOSE_PROFILES=service docker compose stop`
+
 `COMPOSE_PROFILES=service docker compose up -d`
 
