@@ -149,7 +149,9 @@ This will update your domain + peerID automatically
 To update the service to the latest version:<br>
 
 >`COMPOSE_PROFILES=service docker compose stop`
+
 >`COMPOSE_PROFILES=service docker compose pull`
+
 >`COMPOSE_PROFILES=service docker compose up -d`
 
 
@@ -157,6 +159,7 @@ To update the service to the latest version:<br>
 To restart the service:<br>
 
 >`COMPOSE_PROFILES=service docker compose stop`
+
 >`COMPOSE_PROFILES=service docker compose up -d`
 
 
