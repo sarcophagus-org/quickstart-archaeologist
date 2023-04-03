@@ -113,35 +113,45 @@ To run the CLI:
 
 This will update your domain + peerID automatically
 >`docker compose exec -it archaeologist sh`
+
 >`cli update -u`
+
 >`exit`
 
 
 **Deposit 100 SARCO to free bond**
 
 >`docker compose exec -it archaeologist sh`
+
 >`cli update -f 100`
+
 >`exit`
 
 
 **View Profile**
 
 >`docker compose exec -it archaeologist sh`
+
 >`cli view -p`
+
 >`exit`
 
 
 **Claim Rewards**
 
 >`docker compose exec -it archaeologist sh`
+
 >`cli claim`
+
 >`exit`
 
 
 **Withdraw 5 SARCO from Free Bond**
 
 >`docker compose exec -it archaeologist sh`
+
 >`cli free-bond -w 5`
+
 >`exit`
 
 
@@ -242,30 +252,35 @@ To run the CLI:
 
 This will update your domain + peerID automatically
 >`docker container ls`
+
 >`docker exec >container id< -cli update -u`
 
 
 **Deposit 100 SARCO to free bond**
 
 >`docker container ls`
+
 >`docker exec >container id< cli update -f 100`
 
 
 **View Profile**
 
 >`docker container ls`
+
 >`docker exec >container id< cli view -p`
 
 
 **Claim Rewards**
 
 >`docker container ls`
+
 >`docker exec >container id< cli claim`
 
 
 **Withdraw 5 SARCO from Free Bond**
 
 >`docker container ls`
+
 >`docker exec >container id< cli free-bond -w 5`
 
 
@@ -273,7 +288,9 @@ This will update your domain + peerID automatically
 To update the service to the latest version:<br>
 
 >`COMPOSE_PROFILES=service docker-compose stop`
+
 >`COMPOSE_PROFILES=service docker-compose pull`
+
 >`COMPOSE_PROFILES=service docker-compose up -d`
 
 
@@ -281,6 +298,7 @@ To update the service to the latest version:<br>
 To restart the service:<br>
 
 >`COMPOSE_PROFILES=service docker-compose stop`
+
 >`COMPOSE_PROFILES=service docker-compose up -d`
 
 
@@ -314,6 +332,7 @@ To get your domain and peerID, run:
 
 
 >`docker compose exec -it archaeologist sh`
+
 >`cli view -p`
 
 
