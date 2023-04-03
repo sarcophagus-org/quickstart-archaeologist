@@ -46,15 +46,15 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 1. Clone this repo:
 
-   `git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
+   >`git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
 
 2. Copy example env file.
 
-   `cp .env.example .env`
+   >`cp .env.example .env`
 
 3. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
 
-   `nano.env` 
+   >`nano.env` 
   
   or
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
@@ -62,7 +62,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 4. Create blank peer ID file.
 
-   `touch peer-id.json`
+   >`touch peer-id.json`
 
 5. **If you have not yet registered your archaeologist:**
 
@@ -110,54 +110,54 @@ To run the CLI:
 
 #### Examples
 **Update Profile**
-```
-// this will update your domain + peerID automatically
-docker compose exec -it archaeologist sh
-cli update -u
-exit
-```
+
+This will update your domain + peerID automatically
+>`docker compose exec -it archaeologist sh`
+>`cli update -u`
+>`exit`
+
 
 **Deposit 100 SARCO to free bond**
-```
-docker compose exec -it archaeologist sh
-cli update -f 100
-exit
-```
+
+>`docker compose exec -it archaeologist sh`
+>`cli update -f 100`
+>`exit`
+
 
 **View Profile**
-```
-docker compose exec -it archaeologist sh
-cli view -p
-exit
-```
+
+>`docker compose exec -it archaeologist sh`
+>`cli view -p`
+>`exit`
+
 
 **Claim Rewards**
-```
-docker compose exec -it archaeologist sh
-cli claim
-exit
-```
+
+>`docker compose exec -it archaeologist sh`
+>`cli claim`
+>`exit`
+
 
 **Withdraw 5 SARCO from Free Bond**
-```
-docker compose exec -it archaeologist sh
-cli free-bond -w 5
-exit
-```
+
+>`docker compose exec -it archaeologist sh`
+>`cli free-bond -w 5`
+>`exit`
+
 
 ### Updating the service
 To update the service to the latest version:<br>
 
-`COMPOSE_PROFILES=service docker compose stop`
-`COMPOSE_PROFILES=service docker compose pull`
-`COMPOSE_PROFILES=service docker compose up -d`
+>`COMPOSE_PROFILES=service docker compose stop`
+>`COMPOSE_PROFILES=service docker compose pull`
+>`COMPOSE_PROFILES=service docker compose up -d`
 
 
 ### Restarting the service
 To restart the service:<br>
 
-`COMPOSE_PROFILES=service docker compose stop`
-`COMPOSE_PROFILES=service docker compose up -d`
+>`COMPOSE_PROFILES=service docker compose stop`
+>`COMPOSE_PROFILES=service docker compose up -d`
 
 
 
@@ -182,21 +182,21 @@ To restart the service:<br>
 
 1. Once your VPS is setup, and you have Gitbash installed, connect to your droplet using the gitbash CLI:
 
-  `ssh root@>droplet-ip<`
+  >`ssh root@>droplet-ip<`
   
 2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
  
 3. Once setup is complete, Clone this repo:
 
-   `git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
+   >`git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
 
 4. Copy example env file.
 
-   `cp .env.example .env`
+   >`cp .env.example .env`
 
 5. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
 
-    `nano.env`
+   >`nano.env`
   
   or
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker-compose run seed-gen`
@@ -204,7 +204,7 @@ To restart the service:<br>
 
 6. Create blank peer ID file.
 
-   `touch peer-id.json`
+   >`touch peer-id.json`
 
 7. **If you have not yet registered your archaeologist:**
 
@@ -238,47 +238,47 @@ To run the CLI:
 **Update Profile**
 
 This will update your domain + peerID automatically
-`docker container ls`
-`docker exec >container id< -cli update -u`
+>`docker container ls`
+>`docker exec >container id< -cli update -u`
 
 
 **Deposit 100 SARCO to free bond**
 
-`docker container ls`
-`docker exec >container id< cli update -f 100`
+>`docker container ls`
+>`docker exec >container id< cli update -f 100`
 
 
 **View Profile**
 
-`docker container ls`
-`docker exec >container id< cli view -p`
+>`docker container ls`
+>`docker exec >container id< cli view -p`
 
 
 **Claim Rewards**
 
-`docker container ls`
-`docker exec >container id< cli claim`
+>`docker container ls`
+>`docker exec >container id< cli claim`
 
 
 **Withdraw 5 SARCO from Free Bond**
 
-`docker container ls`
-`docker exec >container id< cli free-bond -w 5`
+>`docker container ls`
+>`docker exec >container id< cli free-bond -w 5`
 
 
 ### Updating the service
 To update the service to the latest version:<br>
 
-`COMPOSE_PROFILES=service docker-compose stop`
-`COMPOSE_PROFILES=service docker-compose pull`
-`COMPOSE_PROFILES=service docker-compose up -d`
+>`COMPOSE_PROFILES=service docker-compose stop`
+>`COMPOSE_PROFILES=service docker-compose pull`
+>`COMPOSE_PROFILES=service docker-compose up -d`
 
 
 ### Restarting the service
 To restart the service:<br>
 
-`COMPOSE_PROFILES=service docker-compose stop`
-`COMPOSE_PROFILES=service docker-compose up -d`
+>`COMPOSE_PROFILES=service docker-compose stop`
+>`COMPOSE_PROFILES=service docker-compose up -d`
 
 
 
@@ -290,7 +290,7 @@ Ports 443 and 80 must be open on your server.
 
 If using Uncomplicated Firewall on linux, you can use the following to open these ports:
 
-`sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable`
+>`sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable`
 
 
 ### Domain A Record
@@ -305,19 +305,19 @@ https://www.piesocket.com/websocket-tester
 
 Test that your archaeologist can have websocket connection open by entering your websocket address in this format:
 
-`wss://<domain>/p2p/<libp2p peerID>`
+>`wss://<domain>/p2p/<libp2p peerID>`
 
 To get your domain and peerID, run:
 
 
-`docker compose exec -it archaeologist sh`
-`cli view -p`
+>`docker compose exec -it archaeologist sh`
+>`cli view -p`
 
 
 The `PeerId` has the domain and libp2p peerID concatenated with a `:`. So the format is: `<domain>:<peerID>`.
 
 An example would look like:
-`wss://wss.encryptafile.com/p2p/12D3KooWNpTFhjxvvKhzi6AiKk7ByroGpQ8YKXAy85oLJnrfjCst`
+>`wss://wss.encryptafile.com/p2p/12D3KooWNpTFhjxvvKhzi6AiKk7ByroGpQ8YKXAy85oLJnrfjCst`
 
 
 ### Archaeologist not showing in the web application
