@@ -352,7 +352,7 @@ If you update your domain after registering, you will need to update the archaeo
 `exit`
 
 Restart archaeologist service
-`COMPOSE_PROFILES=service docker compose stop`
+>`COMPOSE_PROFILES=service docker compose stop`
 
-`COMPOSE_PROFILES=service docker compose up -d`
+>`COMPOSE_PROFILES=service docker compose up -d`
 
