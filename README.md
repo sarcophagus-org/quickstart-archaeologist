@@ -147,18 +147,18 @@ exit
 
 ### Updating the service
 To update the service to the latest version:<br>
-```
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose pull
-COMPOSE_PROFILES=service docker compose up -d
-```
+
+`COMPOSE_PROFILES=service docker compose stop`
+`COMPOSE_PROFILES=service docker compose pull`
+`COMPOSE_PROFILES=service docker compose up -d`
+
 
 ### Restarting the service
 To restart the service:<br>
-```
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose up -d
-```
+
+`COMPOSE_PROFILES=service docker compose stop`
+`COMPOSE_PROFILES=service docker compose up -d`
+
 
 
 
@@ -182,7 +182,7 @@ COMPOSE_PROFILES=service docker compose up -d
 
 1. Once your VPS is setup, and you have Gitbash installed, connect to your droplet using the gitbash CLI:
 
-  'ssh root@>droplet-ip<'
+  `ssh root@>droplet-ip<`
   
 2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
  
@@ -196,7 +196,7 @@ COMPOSE_PROFILES=service docker compose up -d
 
 5. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
 
-  `nano.env`
+    `nano.env`
   
   or
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker-compose run seed-gen`
@@ -236,50 +236,50 @@ To run the CLI:
 
 #### Operations Windows
 **Update Profile**
-```
-// this will update your domain + peerID automatically
-docker container ls
-docker exec >container id< -cli update -u
-```
+
+This will update your domain + peerID automatically
+`docker container ls`
+`docker exec >container id< -cli update -u`
+
 
 **Deposit 100 SARCO to free bond**
-```
-docker container ls
-docker exec >container id< cli update -f 100
-```
+
+`docker container ls`
+`docker exec >container id< cli update -f 100`
+
 
 **View Profile**
-```
-docker container ls
-docker exec >container id< cli view -p
-```
+
+`docker container ls`
+`docker exec >container id< cli view -p`
+
 
 **Claim Rewards**
-```
-docker container ls
-docker exec >container id< cli claim
-```
+
+`docker container ls`
+`docker exec >container id< cli claim`
+
 
 **Withdraw 5 SARCO from Free Bond**
-```
-docker container ls
-docker exec >container id< cli free-bond -w 5
-```
+
+`docker container ls`
+`docker exec >container id< cli free-bond -w 5`
+
 
 ### Updating the service
 To update the service to the latest version:<br>
-```
-COMPOSE_PROFILES=service docker-compose stop
-COMPOSE_PROFILES=service docker-compose pull
-COMPOSE_PROFILES=service docker-compose up -d
-```
+
+`COMPOSE_PROFILES=service docker-compose stop`
+`COMPOSE_PROFILES=service docker-compose pull`
+`COMPOSE_PROFILES=service docker-compose up -d`
+
 
 ### Restarting the service
 To restart the service:<br>
-```
-COMPOSE_PROFILES=service docker-compose stop
-COMPOSE_PROFILES=service docker-compose up -d
-```
+
+`COMPOSE_PROFILES=service docker-compose stop`
+`COMPOSE_PROFILES=service docker-compose up -d`
+
 
 
 ## Troubleshooting
@@ -289,9 +289,9 @@ Below are some things to do to ensure your archaeologist is running correctly.
 Ports 443 and 80 must be open on your server.
 
 If using Uncomplicated Firewall on linux, you can use the following to open these ports:
-```
-sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable
-```
+
+`sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable`
+
 
 ### Domain A Record
 Your domain must have an A record pointing at the IP address of your server that the archaeologist service is running on.
@@ -309,10 +309,10 @@ Test that your archaeologist can have websocket connection open by entering your
 
 To get your domain and peerID, run:
 
-```
-docker compose exec -it archaeologist sh
-cli view -p
-```
+
+`docker compose exec -it archaeologist sh`
+`cli view -p`
+
 
 The `PeerId` has the domain and libp2p peerID concatenated with a `:`. So the format is: `<domain>:<peerID>`.
 
@@ -326,28 +326,28 @@ An example would look like:
 3. Ensure your domain is pointed at the IP address of your server using: 
 4. See if any errors appear in the logs of either your archaeologist service, or the SSL service
 
-```
-**Archaeologist Logs**
-docker container ls   // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
-docker logs <container_id>
-```
 
-```
+**Archaeologist Logs**
+`docker container ls`   // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+`docker logs <container_id>`
+
+
+
 **SSL cert logs**
-docker container ls   // get container ID of nginxproxy/acme-companion
-docker logs <container_id>
-```
+`docker container ls`   // get container ID of nginxproxy/acme-companion
+`docker logs <container_id>`
+
 
 ### Updating your domain after registering
 If you update your domain after registering, you will need to update the archaeologist profile and restart your service.
 
-```
-// Update the archaeologist by depositing 1 free bond
-docker compose exec -it archaeologist sh
-cli update -f 1
-exit
 
-// restart archaeologist service
-COMPOSE_PROFILES=service docker compose stop
-COMPOSE_PROFILES=service docker compose up -d
-```
+**Update the archaeologist by depositing 1 free bond
+`docker compose exec -it archaeologist sh`
+`cli update -f 1`
+`exit`
+
+Restart archaeologist service
+`COMPOSE_PROFILES=service docker compose stop`
+`COMPOSE_PROFILES=service docker compose up -d`
+
