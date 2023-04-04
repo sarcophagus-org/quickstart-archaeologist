@@ -60,7 +60,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 5. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
 
-   >`nano.env` 
+   >`nano .env` 
   
   or
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
@@ -215,7 +215,7 @@ To restart the service:<br>
 
 5. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
 
-   >`nano.env`
+   >`nano .env`
   
   or
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker-compose run seed-gen`
