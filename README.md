@@ -46,7 +46,7 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 1. Once your VPS is setup, connect to your droplet using the CLI:
 
-  >`ssh root@>droplet-ip<`
+   >`ssh root@>droplet-ip<`
   
 2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
  
