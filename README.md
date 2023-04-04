@@ -24,7 +24,7 @@ Any OS
 
 
 # Prerequisites Linux:
-- Running a server with the following installed:
+- Running a server(VPS) with the following installed:
   - git
   - [docker (>= 20.0)](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
   - [docker compose (>= 2.0.0)](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
@@ -44,15 +44,21 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
 ## Setup Instructions Linux
 
-1. Clone this repo:
+1. Once your VPS is setup, connect to your droplet using the CLI:
+
+  >`ssh root@>droplet-ip<`
+  
+2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
+ 
+3. Once setup is complete, Clone this repo:
 
    >`git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
 
-2. Copy example env file.
+4. Copy example env file.
 
    >`cp .env.example .env`
 
-3. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
+5. Fill out the env file values.  *warning: do not alter the name of the file or it will not be recognized*
 
    >`nano.env` 
   
@@ -60,11 +66,11 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 - To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
 - Copy this value to your env file
 
-4. Create blank peer ID file.
+6. Create blank peer ID file.
 
    >`touch peer-id.json`
 
-5. **If you have not yet registered your archaeologist:**
+7. **If you have not yet registered your archaeologist:**
 
    > `COMPOSE_PROFILES=register docker compose run register`  
    
@@ -79,11 +85,11 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
    - When your free bond drops below your minimum digging fee, you will no longer be able to accept new jobs or appear in the embalmer web application list.
    - See CLI instructions for updating these values after registration.
 
-6. Run the service in the background
+8. Run the service in the background
 
    > `COMPOSE_PROFILES=service docker compose up -d`
    
-7. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
+9. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
 - Please allow up to a minute for the archaeologist list to populate.
 
 ## Logging
