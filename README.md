@@ -201,7 +201,7 @@ To restart the service:<br>
 
 1. Once your VPS is setup, and you have Gitbash installed, connect to your droplet using the gitbash CLI:
 
-  >`ssh root@>droplet-ip<`
+   >`ssh root@>droplet-ip<`
   
 2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
  
