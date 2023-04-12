@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   register:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     network_mode: "host"
     profiles: ["register"]
     env_file:
@@ -25,7 +25,7 @@ services:
       CHAIN_ID: 5
 
   archaeologist:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     networks:
       service_network:
     profiles: ["service"]
@@ -86,7 +86,7 @@ services:
     depends_on:
       - nginx-proxy
   seed-gen:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     profiles: [ "seed" ]
     command:
       - /bin/bash
