@@ -54,11 +54,65 @@ services:
     depends_on:
       - nginx-proxy
       - acme-companion
+  
+  register-test:
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    network_mode: "host"
+    profiles: ["register-test"]
+    env_file:
+      - ./.env
+    command:
+      - /bin/bash
+      - -c
+      - |
+        npm run peer-id-gen
+        NODE_NO_WARNINGS=1 npm run cli register -- -g
+    volumes:
+      - type: bind
+        source: ./peer-id.json
+        target: /home/node/app/peer-id.json
+    stdin_open: true
+    tty: true
+    environment:
+      FORCE_COLOR: 1
+      NODE_NO_WARNINGS: 1
+      CHAIN_ID: 5
+
+  archaeologist-test:
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    networks:
+      service_network:
+    profiles: ["test"]
+    restart: on-failure
+    env_file:
+      - ./.env
+    command:
+      - /bin/bash
+      - -c
+      - NODE_NO_WARNINGS=1 npm run cli start
+    volumes:
+      - type: bind
+        source: ./peer-id.json
+        target: /home/node/app/peer-id.json
+    stdin_open: true
+    tty: true
+    environment:
+      FORCE_COLOR: 1
+      NODE_NO_WARNINGS: 1
+      CHAIN_ID: 5
+      VIRTUAL_HOST: ${DOMAIN}
+      VIRTUAL_PORT: 9000
+      LETSENCRYPT_HOST: ${DOMAIN}
+    expose:
+      - "9000"
+    depends_on:
+      - nginx-proxy
+      - acme-companion
 
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
-    profiles: ["service"]
+    profiles: ["service", "test"]
     restart: on-failure
     networks: 
       service_network:
@@ -73,7 +127,7 @@ services:
 
   acme-companion:
     image: nginxproxy/acme-companion
-    profiles: ["service"]
+    profiles: ["service", "test"]
     restart: on-failure
     networks:
       service_network:
