@@ -68,6 +68,8 @@ or
 
    > `docker compose run register-test`
 
+   (Remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!)
+
    _(or `docker-compose` for older versions of docker compose)_
 
    Follow the instructions to register your archaeologist. A peer ID will automatically be generated for you.
@@ -87,6 +89,8 @@ or
    or to run on the goerli testnet:
 
    > `COMPOSE_PROFILES=test docker compose up -d`
+
+   (Remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!)
 
 9. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
 
@@ -162,7 +166,7 @@ This will update your domain + peerID automatically
 
 ### Updating the service
 
-To update the service to the latest version (replace `service` with `test` for testnet):<br>
+To update the service to the latest version (replace `service` with `test` for testnet, and remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!):<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
@@ -172,7 +176,7 @@ To update the service to the latest version (replace `service` with `test` for t
 
 ### Restarting the service
 
-To restart the service (replace `service` with `test` for testnet):<br>
+To restart the service (replace `service` with `test` for testnet, and remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!):<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
@@ -237,7 +241,7 @@ An example would look like:
 
 > `docker logs <container_id>`
 
-Restart archaeologist service (replace `service` with `test` for testnet)
+Restart archaeologist service (replace `service` with `test` for testnet, and remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!)
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
