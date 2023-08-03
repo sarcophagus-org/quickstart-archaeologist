@@ -10,7 +10,7 @@
 
 ## Prerequisites:
 
-_For Windows users, steps are the same, but install GitBash(or similar) for a CLI environment to operate from >_ https://gitforwindows.org/)
+_For Windows users, steps are the same, but install GitBash (or similar) for a CLI environment to operate from:_ https://gitforwindows.org/
 
 - Running a server with the following installed:
   - git
@@ -47,14 +47,18 @@ _If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SAR
 
    > `cp .env.example .env`
 
-5. Fill out the env file values. _warning: do not alter the name of the file or it will not be recognized_
+5. Fill out the `.env` file values. _warning: do not alter the name of the file or it will not be recognized_
 
    > `nano .env`
 
-or
+   - If you do not already have one, generate a BIP39 seed: `COMPOSE_PROFILES=seed docker compose run seed-gen`
 
-- To generate a BIP39 seed offline, run: `COMPOSE_PROFILES=seed docker compose run seed-gen`
-- Copy this value to your env file
+   - Copy this value to your env file as `ENCRYPTION_MNEMONIC`
+
+   **RUNNING ON TESTNET:**
+
+   - If you intend to test-run your node on a testnet, set the `TESTNET_PROVIDER_URL` and `CHAIN_ID` env variables,
+     otherwise leave those blank. All other variables are required.
 
 6. Create blank peer ID file.
 
@@ -64,11 +68,9 @@ or
 
    > `docker compose run register`
 
-   or to register on the goerli testnet:
+   or to register on the configured testnet:
 
    > `docker compose run register-test`
-
-   (Remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!)
 
    _(or `docker-compose` for older versions of docker compose)_
 
@@ -78,7 +80,7 @@ or
 
    **Notes on Registration:**
 
-   - It is recommended you set your free bond to at least a 10x multiple of your digging fee. (I.e. if `MIN_DIGGING_FEE=5`, set your `FREE_BOND` to at least `50`.
+   - It is recommended you set your free bond to at least a 10x multiple of your digging fee (i.e. if `MIN_DIGGING_FEE=5`, set your `FREE_BOND` to at least `50`).
    - When your free bond drops below your minimum digging fee, you will no longer be able to accept new jobs or appear in the embalmer web application list.
    - See CLI instructions for updating these values after registration.
 
@@ -86,11 +88,9 @@ or
 
    > `COMPOSE_PROFILES=service docker compose up -d`
 
-   or to run on the goerli testnet:
+   or to run on the configured testnet:
 
    > `COMPOSE_PROFILES=test docker compose up -d`
-
-   (Remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!)
 
 9. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
 
@@ -166,7 +166,7 @@ This will update your domain + peerID automatically
 
 ### Updating the service
 
-To update the service to the latest version (replace `service` with `test` for testnet, and remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!):<br>
+To update the service to the latest version (replace `service` with `test` for testnet):<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
@@ -176,7 +176,7 @@ To update the service to the latest version (replace `service` with `test` for t
 
 ### Restarting the service
 
-To restart the service (replace `service` with `test` for testnet, and remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!):<br>
+To restart the service (replace `service` with `test` for testnet):<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
@@ -241,7 +241,7 @@ An example would look like:
 
 > `docker logs <container_id>`
 
-Restart archaeologist service (replace `service` with `test` for testnet, and remember to set `PROVIDER_URL` in `.env` to the correct network's RPC URL!)
+Restart archaeologist service (replace `service` with `test` for testnet)
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
