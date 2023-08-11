@@ -1,34 +1,27 @@
 version: "3.9"
-
 services:
   register:
-    image: arch-service:dappnode
-    # image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
-    # network_mode: "host"
+    image: "ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest"
     networks:
       dnpublic_network:
         aliases:
           - service_network
     command:
       - /bin/bash
-      - -c
+      - "-c"
       - NODE_NO_WARNINGS=1 npm run cli register -- -g
     volumes:
-      - peer-id-volume:/home/node/app
-    # stdin_open: true
-    # tty: true
+      - "peer-id-volume:/home/node/app"
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
       CHAIN_ID: 1
-      PROVIDER_URL: ${PROVIDER_URL}
-      ETH_PRIVATE_KEY: ${ETH_PRIVATE_KEY}
-      ENCRYPTION_MNEMONIC: ${ENCRYPTION_MNEMONIC}
-      DOMAIN: ${DOMAIN}
-
+      PROVIDER_URL: "${PROVIDER_URL}"
+      ETH_PRIVATE_KEY: "${ETH_PRIVATE_KEY}"
+      ENCRYPTION_MNEMONIC: "${ENCRYPTION_MNEMONIC}"
+      DOMAIN: "${DOMAIN}"
   archaeologist:
-    image: arch-service:dappnode
-    # image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: "ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest"
     networks:
       dnpublic_network:
         aliases:
@@ -36,57 +29,48 @@ services:
     restart: on-failure
     command:
       - /bin/bash
-      - -c
+      - "-c"
       - NODE_NO_WARNINGS=1 npm run cli start
     volumes:
-      - peer-id-volume:/home/node/app
-    # stdin_open: true
-    # tty: true
+      - "peer-id-volume:/home/node/app"
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
       CHAIN_ID: 1
-      VIRTUAL_HOST: ${DOMAIN}
+      VIRTUAL_HOST: "${DOMAIN}"
       VIRTUAL_PORT: 9000
-      LETSENCRYPT_HOST: ${DOMAIN}
-      PROVIDER_URL: ${PROVIDER_URL}
-      ETH_PRIVATE_KEY: ${ETH_PRIVATE_KEY}
-      ENCRYPTION_MNEMONIC: ${ENCRYPTION_MNEMONIC}
-      DOMAIN: ${DOMAIN}
+      LETSENCRYPT_HOST: "${DOMAIN}"
+      PROVIDER_URL: "${PROVIDER_URL}"
+      ETH_PRIVATE_KEY: "${ETH_PRIVATE_KEY}"
+      ENCRYPTION_MNEMONIC: "${ENCRYPTION_MNEMONIC}"
+      DOMAIN: "${DOMAIN}"
     expose:
       - "9000"
     depends_on:
       - nginx-proxy
       - acme-companion
-  
   register-test:
-    image: arch-service:dappnode
-    # image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dappnode
-    # network_mode: "host"
+    image: "ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest"
     networks:
       dnpublic_network:
         aliases:
           - service_network
     command:
       - /bin/bash
-      - -c
+      - "-c"
       - NODE_NO_WARNINGS=1 npm run cli register -- -g
     volumes:
-      - peer-id-volume:/home/node/app
-    # stdin_open: true
-    # tty: true
+      - "peer-id-volume:/home/node/app"
     environment:
-      PROVIDER_URL: ${TESTNET_PROVIDER_URL}
-      CHAIN_ID: ${CHAIN_ID}
-      ETH_PRIVATE_KEY: ${ETH_PRIVATE_KEY}
-      ENCRYPTION_MNEMONIC: ${ENCRYPTION_MNEMONIC}
-      DOMAIN: ${DOMAIN}
+      PROVIDER_URL: "${TESTNET_PROVIDER_URL}"
+      CHAIN_ID: "${CHAIN_ID}"
+      ETH_PRIVATE_KEY: "${ETH_PRIVATE_KEY}"
+      ENCRYPTION_MNEMONIC: "${ENCRYPTION_MNEMONIC}"
+      DOMAIN: "${DOMAIN}"
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
-
   archaeologist-test:
-    image: arch-service:dappnode
-    # image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: "ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest"
     networks:
       dnpublic_network:
         aliases:
@@ -94,31 +78,28 @@ services:
     restart: on-failure
     command:
       - /bin/bash
-      - -c
+      - "-c"
       - NODE_NO_WARNINGS=1 npm run cli start
     volumes:
-      - peer-id-volume:/home/node/app
-    # stdin_open: true
-    # tty: true
+      - "peer-id-volume:/home/node/app"
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
-      VIRTUAL_HOST: ${DOMAIN}
+      VIRTUAL_HOST: "${DOMAIN}"
       VIRTUAL_PORT: 9000
-      LETSENCRYPT_HOST: ${DOMAIN}
-      PROVIDER_URL: ${TESTNET_PROVIDER_URL}
-      ETH_PRIVATE_KEY: ${ETH_PRIVATE_KEY}
-      ENCRYPTION_MNEMONIC: ${ENCRYPTION_MNEMONIC}
-      DOMAIN: ${DOMAIN}
-      CHAIN_ID: ${CHAIN_ID}
+      LETSENCRYPT_HOST: "${DOMAIN}"
+      PROVIDER_URL: "${TESTNET_PROVIDER_URL}"
+      ETH_PRIVATE_KEY: "${ETH_PRIVATE_KEY}"
+      ENCRYPTION_MNEMONIC: "${ENCRYPTION_MNEMONIC}"
+      DOMAIN: "${DOMAIN}"
+      CHAIN_ID: "${CHAIN_ID}"
     expose:
       - "9000"
-
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     restart: on-failure
-    networks: 
+    networks:
       dnpublic_network:
         aliases:
           - service_network
@@ -126,58 +107,47 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      # -  /var/run/docker.sock:/tmp/docker.sock:ro
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - certs:/etc/nginx/certs
-
+      - "vhost:/etc/nginx/vhost.d"
+      - "html:/usr/share/nginx/html"
+      - "certs:/etc/nginx/certs"
   acme-companion:
     image: nginxproxy/acme-companion
-    # restart: on-failure
     networks:
       dnpublic_network:
         aliases:
           - service_network
     volumes:
-      # - /var/run/docker.sock:/var/run/docker.sock:ro
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html 
-      - certs:/etc/nginx/certs
-      - acme:/etc/acme.sh
+      - "vhost:/etc/nginx/vhost.d"
+      - "html:/usr/share/nginx/html"
+      - "certs:/etc/nginx/certs"
+      - "acme:/etc/acme.sh"
     environment:
-      NGINX_PROXY_CONTAINER: "nginx-proxy"
+      NGINX_PROXY_CONTAINER: nginx-proxy
     depends_on:
       - nginx-proxy
-
   peer-id-gen:
-    image: arch-service:dappnode
+    image: "ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest"
     command:
       - /bin/bash
-      - -c
+      - "-c"
       - npm run peer-id-gen
     volumes:
-      - peer-id-volume:/home/node/app
+      - "peer-id-volume:/home/node/app"
     environment:
       NODE_NO_WARNINGS: 1
-  
   seed-gen:
-    image: arch-service:dappnode
-    # image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: "ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest"
     command:
       - /bin/bash
-      - -c
+      - "-c"
       - npm run seed-gen
-    # stdin_open: true
-    # tty: true
     environment:
       NODE_NO_WARNINGS: 1
-
 networks:
-    dnpublic_network:
-
+  dnpublic_network: null
 volumes:
-    certs: {}
-    vhost: {}
-    html: {}
-    acme: {}
-    peer-id-volume: {}
+  certs: {}
+  vhost: {}
+  html: {}
+  acme: {}
+  peer-id-volume: {}
