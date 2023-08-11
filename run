@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PROFILE=$1
+test=$2
+
+if [ "$PROFILE" == "register" ]; then
+    docker compose run peer-id-gen
+    if [ "$test" == "test" ]; then
+        docker compose run register-test
+    else 
+        docker compose run register
+    fi
+elif [ "$PROFILE" == "service" ]; then
+        docker compose run -d -v /var/run/docker.sock:/tmp/docker.sock:ro nginx-proxy
+        docker compose run -d -v /var/run/docker.sock:/var/run/docker.sock:ro acme-companion
+    if [ "$test" == "test" ]; then
+        echo "test"
+        docker compose run -d archaeologist-test
+    else 
+        docker compose run -d archaeologist
+    fi
+else
+    echo "Unknown profile: $PROFILE"
+    exit 1
+fi

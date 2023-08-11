@@ -1,0 +1,12 @@
+{
+  "name": "sarcophagus.archaeologist.dappnode.eth",
+  "version": "0.1.0",
+  "description": "Archaeologist Service",
+  "type": "service",
+  "author": "SarcophagusDAO",
+  "categories": ["Developer tools"],
+  "links": {
+    "homepage": "example.com"
+  },
+  "license": "GPL-3.0"
+}

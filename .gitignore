@@ -1,3 +1,6 @@
 .env
 peer-id.json
 .idea/
+# DAppNodeSDK release directories
+build_*
+releases.json
