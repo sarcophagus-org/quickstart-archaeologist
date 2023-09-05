@@ -25,7 +25,11 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 - BIP39 compatible mnemonic (see **Setup Instructions** or generate a new one here: [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/))
 - RPC URL (Infura, Alchemy, etc.)
 
-_If running on Goerli (chain id = 5), then you will need Goerli ETH + Goerli SARCO._
+_If running on a testnet, then you will need its corresponding Testnet ETH + Testnet SARCO._
+
+The following Ethereum testnets are currently supported:
+Goerli: (chain id: 5)
+Sepolia (chain id: 11155111)
 
 - A registered domain name [pointed at your server's ip address](https://www.servers.com/support/knowledge/dedicated-servers/how-to-point-your-domain-name-to-dedicated-servers-ip-address#:~:text=To%20point%20your%20domain%20name%20to%20your%20dedicated%20server's%20public,on%20the%20domain's%20name%20servers.)
 
