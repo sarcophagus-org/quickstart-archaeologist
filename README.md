@@ -122,15 +122,16 @@ To run the CLI:
 
 1. If the service is not started, start the service with `docker compose up -d`,
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
+   (`docker compose exec -it archaeologist-test sh` if on testnet)
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
 #### Examples
 
+You will need to jump into the container to run these commands: `docker compose exec -it archaeologist sh` (`docker compose exec -it archaeologist-test sh` if on testnet)
+
 **Update Profile**
 
 This will update your domain + peerID automatically
-
-> `docker compose exec -it archaeologist sh`
 
 > `cli update -u`
 
@@ -138,15 +139,11 @@ This will update your domain + peerID automatically
 
 **Deposit 100 SARCO to free bond**
 
-> `docker compose exec -it archaeologist sh`
-
 > `cli update -f 100`
 
 > `exit`
 
 **View Profile**
-
-> `docker compose exec -it archaeologist sh`
 
 > `cli view -p`
 
@@ -154,15 +151,11 @@ This will update your domain + peerID automatically
 
 **Claim Rewards**
 
-> `docker compose exec -it archaeologist sh`
-
 > `cli claim`
 
 > `exit`
 
 **Withdraw 5 SARCO from Free Bond**
-
-> `docker compose exec -it archaeologist sh`
 
 > `cli free-bond -w 5`
 
@@ -170,7 +163,7 @@ This will update your domain + peerID automatically
 
 ### Updating the service
 
-To update the service to the latest version (replace `service` with `test` for testnet):<br>
+To update the service to the latest version (_replace `service` with `test` for testnet_):<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
@@ -180,7 +173,7 @@ To update the service to the latest version (replace `service` with `test` for t
 
 ### Restarting the service
 
-To restart the service (replace `service` with `test` for testnet):<br>
+To restart the service (_replace `service` with `test` for testnet_):<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
@@ -245,7 +238,7 @@ An example would look like:
 
 > `docker logs <container_id>`
 
-Restart archaeologist service (replace `service` with `test` for testnet)
+Restart archaeologist service (_replace `service` with `test` for testnet_)
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
