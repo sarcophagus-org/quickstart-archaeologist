@@ -56,7 +56,7 @@ services:
       - acme-companion
   
   register-test:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     network_mode: "host"
     profiles: ["register-test"]
     env_file:
@@ -79,7 +79,7 @@ services:
       NODE_NO_WARNINGS: 1
 
   archaeologist-test:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     networks:
       service_network:
     profiles: ["test"]
