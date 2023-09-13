@@ -93,7 +93,11 @@ The following Ethereum testnets are currently supported:
 
 ### To view the logs
 
-Run `docker container ls` and grab the container ID of the archaeologist service
+Run `docker ps` and grab the container ID of the archaeologist service. Look under the `NAMES` column.
+
+To identify the relevant container, look for the container with the name format: `<directory-name>-archaeologist-<network-name>-1`.
+
+Example, to get the container ID for the archaeologist service running on the Ethereum mainnet, and if you cloned this repo into the default directory called `quickstart-archaeologist`, you would look for a container with the name `quickstart-archaeologist-archaeologist-1`.
 
 Run `docker logs <container-id> --follow` to see realtime logs
 
