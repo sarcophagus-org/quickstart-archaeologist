@@ -4,6 +4,7 @@ services:
   register:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
     network_mode: "host"
+    profiles: ["register"]
     env_file:
       - ./.env
     command:
@@ -26,6 +27,7 @@ services:
   register-sepolia:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     network_mode: "host"
+    profiles: ["register-sepolia"]
     env_file:
       - ./.env
     command:
@@ -49,6 +51,7 @@ services:
   register-goerli:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
     network_mode: "host"
+    profiles: ["register-goerli"]
     env_file:
       - ./.env
     command:
