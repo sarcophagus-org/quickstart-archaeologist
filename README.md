@@ -4,9 +4,10 @@
 2. [Setup Instructions](#setup-instructions)
 3. [Logging](#logging)
 4. [CLI](#cli)
-5. [Updating the service](#updating-the-service)
-6. [Restarting the service](#restarting-the-service)
-7. [Troubleshooting](#troubleshooting)
+5. [Running on multiple networks](#running-on-multiple-networks)
+6. [Updating the service](#updating-the-service)
+7. [Restarting the service](#restarting-the-service)
+8. [Troubleshooting](#troubleshooting)
 
 ## Prerequisites:
 
@@ -24,18 +25,19 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
   - SARCO balance (for bonding your archaeologist to curses)
 - BIP39 compatible mnemonic (see **Setup Instructions** or generate a new one here: [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/))
 - RPC URL (Infura, Alchemy, etc.)
-
-_If running on a testnet, then you will need its corresponding Testnet ETH + Testnet SARCO._
-
-The following Ethereum testnets are currently supported:
-Goerli: (chain id: 5)
-Sepolia (chain id: 11155111)
-
 - A registered domain name [pointed at your server's ip address](https://www.servers.com/support/knowledge/dedicated-servers/how-to-point-your-domain-name-to-dedicated-servers-ip-address#:~:text=To%20point%20your%20domain%20name%20to%20your%20dedicated%20server's%20public,on%20the%20domain's%20name%20servers.)
 
----
+**NOTE**:
 
-## Setup Instructions
+- The provider url should be a websocket url. For example, for infura, it would be `wss://mainnet.infura.io/ws/v3/<project_id>`
+- _If running on a testnet, then you will need its corresponding Testnet Tokens + Testnet SARCO._
+
+The following Ethereum testnets are currently supported:
+
+- Goerli: (chain id: 5)
+- Sepolia (chain id: 11155111)
+
+## Setup Instructions (for Ethereum Mainnet)
 
 1. Once your VPS is setup, connect to your droplet using the CLI:
 
@@ -55,14 +57,9 @@ Sepolia (chain id: 11155111)
 
    > `nano .env`
 
-   - If you do not already have one, generate a BIP39 seed: `COMPOSE_PROFILES=seed docker compose run seed-gen`
+   - If you do not already have one, generate a BIP39 seed: `docker compose run seed-gen`
 
    - Copy this value to your env file as `ENCRYPTION_MNEMONIC`
-
-   **RUNNING ON TESTNET:**
-
-   - If you intend to test-run your node on a testnet, set the `TESTNET_PROVIDER_URL` and `CHAIN_ID` env variables,
-     otherwise leave those blank. All other variables are required.
 
 6. Create blank peer ID file.
 
@@ -71,10 +68,6 @@ Sepolia (chain id: 11155111)
 7. **If you have not yet registered your archaeologist:**
 
    > `docker compose run register`
-
-   or to register on the configured testnet:
-
-   > `docker compose run register-test`
 
    _(or `docker-compose` for older versions of docker compose)_
 
@@ -90,13 +83,9 @@ Sepolia (chain id: 11155111)
 
 8. Run the service in the background
 
-   > `COMPOSE_PROFILES=service docker compose up -d`
+   > `docker compose up archaeologist -d`
 
-   or to run on the configured testnet:
-
-   > `COMPOSE_PROFILES=test docker compose up -d`
-
-9. You can verify your service is registered correctly by visiting https://dev-sarcophagus.netlify.app/archaeologists
+9. You can verify your service is registered correctly by visiting https://app.dev.sarcophagus.io/archaeologists
 
 - Please allow up to a minute for the archaeologist list to populate.
 
@@ -120,14 +109,13 @@ A CLI is provided for running additional commands for your service, such as upda
 
 To run the CLI:
 
-1. If the service is not started, start the service with `docker compose up -d`,
+1. If the service is not started, start the service with `docker compose up archaeologist -d`,
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
-   (`docker compose exec -it archaeologist-test sh` if on testnet)
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
 #### Examples
 
-You will need to jump into the container to run these commands: `docker compose exec -it archaeologist sh` (`docker compose exec -it archaeologist-test sh` if on testnet)
+You will need to jump into the container to run these commands: `docker compose exec -it archaeologist sh`
 
 **Update Profile**
 
@@ -161,23 +149,78 @@ This will update your domain + peerID automatically
 
 > `exit`
 
-### Updating the service
+## Running on multiple networks
 
-To update the service to the latest version (_replace `service` with `test` for testnet_):<br>
+All commands above will run your archaeologist on the Ethereum mainnet.
 
-> `COMPOSE_PROFILES=service docker compose stop`
+To run your archaeologist node on another network, you will need a libp2p peer ID for each network you intend to run on.
+The following networks are currently supported:
 
-> `COMPOSE_PROFILES=service docker compose pull`
+### Goerli
 
-> `COMPOSE_PROFILES=service docker compose up -d`
+Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL: `nano .env`
+Run `touch peer-id-goerli.json` in the root directory of this repo.
+Run `docker compose run register-goerli` to register your archaeologist on the Goerli testnet.
+Run `docker compose up archaeologist-goerli -d` to start the service on the Goerli testnet.
 
-### Restarting the service
+### Sepolia
 
-To restart the service (_replace `service` with `test` for testnet_):<br>
+Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL: `nano .env`
+Run `touch peer-id-sepolia.json` in the root directory of this repo.
+Run `docker compose run register-sepolia` to register your archaeologist on the Sepolia testnet.
+Run `docker compose up archaeologist-sepolia -d` to start the service on the Sepolia testnet.
 
-> `COMPOSE_PROFILES=service docker compose stop`
+### Targetting multiple networks:
 
-> `COMPOSE_PROFILES=service docker compose up -d`
+While you can individually start up on each network using the above instructions, there's also provision to run on common combinations of multiple networks at once.
+
+Remember to complete the prerequisite setup for each network you intend to run on, if you haven't done so already:
+
+- Set the appropriate provider URLs in your `.env` file.
+- Register your archaeologist.
+- Create a peer ID file for each network you intend to run on.
+
+#### All supported networks
+
+`COMPOSE_PROFILES=all-networks docker compose up -d`
+
+#### Ethereum Mainnet + All supported Ethereum testnets
+
+`COMPOSE_PROFILES=eth docker compose up -d`
+
+#### All supported Ethereum testnets
+
+`COMPOSE_PROFILES=eth-test docker compose up -d`
+
+#### Ethereum Mainnet + Goerli
+
+`COMPOSE_PROFILES=eth-goerli docker compose up -d`
+
+#### Ethereum Mainnet + Sepolia
+
+`COMPOSE_PROFILES=eth-sepolia docker compose up -d`
+
+## Updating the service
+
+To update the service to the latest version:<br>
+
+> `COMPOSE_PROFILES=all-networks docker compose stop`
+
+> `COMPOSE_PROFILES=all-networks docker compose pull`
+
+- Start your service again using any of the methods above depending on which networks (or combination of networks) you want to run on.
+
+## Restarting the service
+
+To restart the service:<br>
+
+> `docker compose <container-selector> stop`
+
+> `docker compose up <container-selector> -d`
+
+Replace `<container-selector>` with the name of the container you want to restart. See instructions above.
+
+---
 
 ## Troubleshooting
 
@@ -228,18 +271,12 @@ An example would look like:
 
 **Archaeologist Logs**
 
-> `docker container ls` // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+> `docker ps` // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
 
 > `docker logs <container_id>`
 
 **SSL cert logs**
 
-> `docker container ls` // get container ID of nginxproxy/acme-companion
+> `docker ps` // get container ID of nginxproxy/acme-companion
 
 > `docker logs <container_id>`
-
-Restart archaeologist service (_replace `service` with `test` for testnet_)
-
-> `COMPOSE_PROFILES=service docker compose stop`
-
-> `COMPOSE_PROFILES=service docker compose up -d`
