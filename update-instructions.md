@@ -21,3 +21,8 @@ You will need to update your contracts profile to resolve this:
 - `docker compose exec -it archaeologist-goerli sh` (or `docker compose exec -it archaeologist-sepolia sh` for sepolia)
 - `cli update -u`
 - `exit`
+
+### Setting up notifications:
+
+The quickstart repository readme has been updated to include instructions on setting up notificatoins.
+See the heading "Notifications".

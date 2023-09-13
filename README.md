@@ -7,7 +7,8 @@
 5. [Running on multiple networks](#running-on-multiple-networks)
 6. [Updating the service](#updating-the-service)
 7. [Restarting the service](#restarting-the-service)
-8. [Troubleshooting](#troubleshooting)
+8. [Notifications](#notifications)
+9. [Troubleshooting](#troubleshooting)
 
 ## Prerequisites:
 
@@ -223,6 +224,26 @@ To restart the service:<br>
 > `docker compose up <container-selector> -d`
 
 Replace `<container-selector>` with the name of the container you want to restart. See instructions above.
+
+## Notifications
+
+You can setup your node environment so that you can receive realtime notifications from your nodes. This is important
+if you would like to stay on top of the status of your nodes without having to remember to check in often.
+
+To set up notifications, set the following environment variable(s) in your `.env` file:
+
+- `NOTIFICATION_WEBHOOK_URL=<your-webhook-url>`
+
+  You follow the instructions here to set up a discord webhook url:
+  https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+
+Or, to get updates via email:
+
+- `NOTIFICATION_SENDGRID_API_KEY=<your-sendgrid-api-key>`
+- `NOTIFICATION_SENDGRID_EMAIL=<the-email-to-receive-updates-on>`
+- `NOTIFICATION_SENDGRID_VERIFIED_SENDER=<your-sendgrid-verified-sender>`
+
+You may choose to set all of these to receive notifications via both methods.
 
 ---
 
