@@ -180,6 +180,28 @@ The following networks are currently supported:
 - Run `docker compose run register-sepolia` to register your archaeologist on the Sepolia testnet.
 - Run `docker compose up archaeologist-sepolia -d` to start the service on the Sepolia testnet.
 
+### BaseGoerli
+
+- Make sure `BASE_GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate BaseGoerli provider URL.
+- Make sure `BASE_GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+
+**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
+
+- Run `touch peer-id-base-goerli.json` in the root directory of this repo.
+- Run `docker compose run register-base-goerli` to register your archaeologist on the Base Goerli testnet.
+- Run `docker compose up archaeologist-base-goerli -d` to start the service on the Base Goerli testnet.
+
+### PolygonMumbai
+
+- Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
+- Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+
+**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
+
+- Run `touch peer-id-polygon-mumbai.json` in the root directory of this repo.
+- Run `docker compose run register-polygon-mumbai` to register your archaeologist on the Polygon Mumbai testnet.
+- Run `docker compose up archaeologist-polygon-mumbai -d` to start the service on the Polygon Mumbai testnet.
+
 ### Targetting multiple networks:
 
 While you can individually start up on each network using the above instructions, there's also provision to run on common combinations of multiple networks at once.

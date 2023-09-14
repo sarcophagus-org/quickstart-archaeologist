@@ -167,6 +167,67 @@ services:
       VIRTUAL_HOST: ${DOMAIN}
       VIRTUAL_PORT: 9000
       LETSENCRYPT_HOST: ${DOMAIN}
+  
+  archaeologist-base-goerli:
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
+    networks:
+      service_network:
+    profiles: ["all-networks", "base", "base-goerli"]
+    restart: on-failure
+    env_file:
+      - ./.env
+    command:
+      - /bin/bash
+      - -c
+      - NODE_NO_WARNINGS=1 npm run peer-id-gen && npm run cli start
+    volumes:
+      - type: bind
+        source: ./peer-id-base-goerli.json
+        target: /home/node/app/peer-id.json
+    stdin_open: true
+    tty: true
+    environment:
+      FORCE_COLOR: 1
+      NODE_NO_WARNINGS: 1
+      PROVIDER_URL: ${BASE_GOERLI_PROVIDER_URL}
+      ENCRYPTION_MNEMONIC: ${BASE_GOERLI_ENCRYPTION_MNEMONIC}
+      CHAIN_ID: 84531
+      VIRTUAL_HOST: ${DOMAIN}
+      VIRTUAL_PORT: 9000
+      LETSENCRYPT_HOST: ${DOMAIN}
+    expose:
+      - "9000"
+    depends_on:
+      - nginx-proxy
+      - acme-companion
+
+  archaeologist-polygon-mumbai:
+    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
+    networks:
+      service_network:
+    profiles: ["all-networks", "polygon", "polygon-mumbai"]
+    restart: on-failure
+    env_file:
+      - ./.env
+    command:
+      - /bin/bash
+      - -c
+      - NODE_NO_WARNINGS=1 npm run peer-id-gen && npm run cli start
+    volumes:
+      - type: bind
+        source: ./peer-id-polygon-mumbai.json
+        target: /home/node/app/peer-id.json
+    stdin_open: true
+    tty: true
+    environment:
+      FORCE_COLOR: 1
+      NODE_NO_WARNINGS: 1
+      PROVIDER_URL: ${POLYGON_MUMBAI_PROVIDER_URL}
+      ENCRYPTION_MNEMONIC: ${POLYGON_MUMBAI_ENCRYPTION_MNEMONIC}
+      CHAIN_ID: 80001
+      VIRTUAL_HOST: ${DOMAIN}
+      VIRTUAL_PORT: 9000
+      LETSENCRYPT_HOST: ${DOMAIN}
     expose:
       - "9000"
     depends_on:
