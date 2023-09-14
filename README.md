@@ -33,10 +33,7 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 - The provider url should be a websocket url. For example, for infura, it would be `wss://mainnet.infura.io/ws/v3/<project_id>`
 - _If running on a testnet, then you will need its corresponding Testnet Tokens + Testnet SARCO._
 
-The following Ethereum testnets are currently supported:
-
-- Goerli: (chain id: 5)
-- Sepolia (chain id: 11155111)
+See [Running on multiple networks](#running-on-multiple-networks) for instructions on running on multiple networks.
 
 ## Setup Instructions (for Ethereum Mainnet)
 
@@ -163,17 +160,25 @@ The following networks are currently supported:
 
 ### Goerli
 
-Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL: `nano .env`
-Run `touch peer-id-goerli.json` in the root directory of this repo.
-Run `docker compose run register-goerli` to register your archaeologist on the Goerli testnet.
-Run `docker compose up archaeologist-goerli -d` to start the service on the Goerli testnet.
+- Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
+- Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+
+**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
+
+- Run `touch peer-id-goerli.json` in the root directory of this repo.
+- Run `docker compose run register-goerli` to register your archaeologist on the Goerli testnet.
+- Run `docker compose up archaeologist-goerli -d` to start the service on the Goerli testnet.
 
 ### Sepolia
 
-Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL: `nano .env`
-Run `touch peer-id-sepolia.json` in the root directory of this repo.
-Run `docker compose run register-sepolia` to register your archaeologist on the Sepolia testnet.
-Run `docker compose up archaeologist-sepolia -d` to start the service on the Sepolia testnet.
+- Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
+- Make sure `SEPOLIA_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+
+**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
+
+- Run `touch peer-id-sepolia.json` in the root directory of this repo.
+- Run `docker compose run register-sepolia` to register your archaeologist on the Sepolia testnet.
+- Run `docker compose up archaeologist-sepolia -d` to start the service on the Sepolia testnet.
 
 ### Targetting multiple networks:
 
@@ -181,9 +186,9 @@ While you can individually start up on each network using the above instructions
 
 Remember to complete the prerequisite setup for each network you intend to run on, if you haven't done so already:
 
-- Set the appropriate provider URLs in your `.env` file.
-- Register your archaeologist.
+- Set the appropriate provider URLs and encryption mnemonics in your `.env` file.
 - Create a peer ID file for each network you intend to run on.
+- Register your archaeologist on each network you intend to run on.
 
 #### All supported networks
 
