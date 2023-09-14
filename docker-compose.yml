@@ -132,10 +132,10 @@ services:
       ENCRYPTION_MNEMONIC: ${SEPOLIA_ENCRYPTION_MNEMONIC}
       CHAIN_ID: 11155111
       VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9000
+      VIRTUAL_PORT: 9001
       LETSENCRYPT_HOST: ${DOMAIN}
     expose:
-      - "9000"
+      - "9001"
     depends_on:
       - nginx-proxy
       - acme-companion
@@ -165,8 +165,13 @@ services:
       ENCRYPTION_MNEMONIC: ${GOERLI_ENCRYPTION_MNEMONIC}
       CHAIN_ID: 5
       VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9000
+      VIRTUAL_PORT: 9002
       LETSENCRYPT_HOST: ${DOMAIN}
+    expose:
+      - "9002"
+    depends_on:
+      - nginx-proxy
+      - acme-companion
   
   archaeologist-base-goerli:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
@@ -193,10 +198,10 @@ services:
       ENCRYPTION_MNEMONIC: ${BASE_GOERLI_ENCRYPTION_MNEMONIC}
       CHAIN_ID: 84531
       VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9000
+      VIRTUAL_PORT: 9003
       LETSENCRYPT_HOST: ${DOMAIN}
     expose:
-      - "9000"
+      - "9003"
     depends_on:
       - nginx-proxy
       - acme-companion
@@ -226,10 +231,10 @@ services:
       ENCRYPTION_MNEMONIC: ${POLYGON_MUMBAI_ENCRYPTION_MNEMONIC}
       CHAIN_ID: 80001
       VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9000
+      VIRTUAL_PORT: 9004
       LETSENCRYPT_HOST: ${DOMAIN}
     expose:
-      - "9000"
+      - "9004"
     depends_on:
       - nginx-proxy
       - acme-companion
