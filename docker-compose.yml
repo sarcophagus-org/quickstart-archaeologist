@@ -23,6 +23,7 @@ services:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
       CHAIN_ID: 1
+      ENCRYPTION_MNEMONIC: ${ETH_ENCRYPTION_MNEMONIC}
 
   register-sepolia:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
@@ -96,6 +97,7 @@ services:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
       CHAIN_ID: 1
+      ENCRYPTION_MNEMONIC: ${ETH_ENCRYPTION_MNEMONIC}
       VIRTUAL_HOST: ${DOMAIN}
       VIRTUAL_PORT: 9000
       LETSENCRYPT_HOST: ${DOMAIN}
