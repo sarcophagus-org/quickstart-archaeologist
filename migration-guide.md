@@ -9,25 +9,27 @@ The archaeologist service has been updated to use a websocket provider.
 Your provider url will need to be updated to continue running. It should now be in the `wss:://` format.
 For example, for infura mainnet, it would look like this: `wss://mainnet.infura.io/ws/v3/<your-infura-api-key>`
 
-### _OPTIONAL:_ Running on multiple networks
+### Set `CHAIN_IDS` environment variable
 
-The quickstart repository readme has been updated to include instructions on running on multiple networks.
-See the heading _Running on multiple networks_
+In your `.env` file, set `CHAIN_IDS` to the chain ids of the networks you would like to run on.
+For example, if you would like to run on mainnet and goerli, you would set `CHAIN_IDS="1,5"`.
 
-### Update ENCRYPTION_MNEMONIC to ETH_ENCRYPTION_MNEMONIC
+### Update your provider url(s)
 
-The archaeologist service has been updated to be able to run on multiple networks. To that end, the environment variable
-`ENCRYPTION_MNEMONIC` has been renamed to `ETH_ENCRYPTION_MNEMONIC` (for ethereum mainnet) to avoid confusion with
-other network mnemonics.
+Update `PROVIDER_URL` in your `.env` file to `MAINNET_PROVIDER_URL`.
 
-Run `nano .env` and update this variable. You SHOULD NOT change your mnemonic. If you would like to run on
-any extra networks, follow the readme instructions under the heading _Running on multiple networks_.
+The archaeologist service has been updated to use a websocket provider.
+Your provider url will need to be updated to continue running. It should now be in the `wss:://` format.
+For example, for infura mainnet, it would look like this: `wss://mainnet.infura.io/ws/v3/<your-infura-api-key>`
+
+You will also need to set the provider url for each network you intend to run on.
+See `.env.example` (`cat .env.example`) for an example of how to do this.
 
 ### Update your node environment by running these commands in order:
 
 - `docker image prune`
 - `git pull`
-- `COMPOSE_PROFILES=all-networks docker compose pull`
+- `COMPOSE_PROFILES=service docker compose pull`
 - `docker compose up archaeologist -d`
 
 **Note:**
