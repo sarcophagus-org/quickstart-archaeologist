@@ -12,7 +12,7 @@ services:
       - -c
       - |
         npm run peer-id-gen
-        NODE_NO_WARNINGS=1 npm run cli register -- -g
+        NODE_NO_WARNINGS=1 npm run cli register -- -g --network ${NETWORK}
     volumes:
       - type: bind
         source: ./peer-id.json
@@ -22,71 +22,19 @@ services:
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
-      CHAIN_ID: 1
-      ENCRYPTION_MNEMONIC: ${ETH_ENCRYPTION_MNEMONIC}
-
-  register-sepolia:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
-    network_mode: "host"
-    profiles: ["register-sepolia"]
-    env_file:
-      - ./.env
-    command:
-      - /bin/bash
-      - -c
-      - |
-        npm run peer-id-gen
-        NODE_NO_WARNINGS=1 npm run cli register -- -g
-    volumes:
-      - type: bind
-        source: ./peer-id-sepolia.json
-        target: /home/node/app/peer-id.json
-    stdin_open: true
-    tty: true
-    environment:
-      PROVIDER_URL: ${SEPOLIA_PROVIDER_URL}
-      ENCRYPTION_MNEMONIC: ${SEPOLIA_ENCRYPTION_MNEMONIC}
-      FORCE_COLOR: 1
-      NODE_NO_WARNINGS: 1
-      CHAIN_ID: 11155111
-
-  register-goerli:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
-    network_mode: "host"
-    profiles: ["register-goerli"]
-    env_file:
-      - ./.env
-    command:
-      - /bin/bash
-      - -c
-      - |
-        npm run peer-id-gen
-        NODE_NO_WARNINGS=1 npm run cli register -- -g
-    volumes:
-      - type: bind
-        source: ./peer-id-goerli.json
-        target: /home/node/app/peer-id.json
-    stdin_open: true
-    tty: true
-    environment:
-      PROVIDER_URL: ${GOERLI_PROVIDER_URL}
-      ENCRYPTION_MNEMONIC: ${GOERLI_ENCRYPTION_MNEMONIC}
-      FORCE_COLOR: 1
-      NODE_NO_WARNINGS: 1
-      CHAIN_ID: 5
 
   archaeologist:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
     networks:
       service_network:
-    profiles: ["all-networks", "eth", "eth-goerli", "eth-sepolia"]
+    profiles: ["service"]
     restart: on-failure
     env_file:
       - ./.env
     command:
       - /bin/bash
       - -c
-      - NODE_NO_WARNINGS=1 npm run cli start
+      - NODE_NO_WARNINGS=1 npm run cli start -- --network ${NETWORK}
     volumes:
       - type: bind
         source: ./peer-id.json
@@ -96,8 +44,6 @@ services:
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
-      CHAIN_ID: 1
-      ENCRYPTION_MNEMONIC: ${ETH_ENCRYPTION_MNEMONIC}
       VIRTUAL_HOST: ${DOMAIN}
       VIRTUAL_PORT: 9000
       LETSENCRYPT_HOST: ${DOMAIN}
@@ -107,141 +53,10 @@ services:
       - nginx-proxy
       - acme-companion
 
-  archaeologist-sepolia:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
-    networks:
-      service_network:
-    profiles: ["all-networks", "eth", "eth-test", "eth-sepolia"]
-    restart: on-failure
-    env_file:
-      - ./.env
-    command:
-      - /bin/bash
-      - -c
-      - NODE_NO_WARNINGS=1 npm run peer-id-gen && npm run cli start
-    volumes:
-      - type: bind
-        source: ./peer-id-sepolia.json
-        target: /home/node/app/peer-id.json
-    stdin_open: true
-    tty: true
-    environment:
-      FORCE_COLOR: 1
-      NODE_NO_WARNINGS: 1
-      PROVIDER_URL: ${SEPOLIA_PROVIDER_URL}
-      ENCRYPTION_MNEMONIC: ${SEPOLIA_ENCRYPTION_MNEMONIC}
-      CHAIN_ID: 11155111
-      VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9001
-      LETSENCRYPT_HOST: ${DOMAIN}
-    expose:
-      - "9001"
-    depends_on:
-      - nginx-proxy
-      - acme-companion
-
-  archaeologist-goerli:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
-    networks:
-      service_network:
-    profiles: ["all-networks", "eth", "eth-test", "eth-goerli"]
-    restart: on-failure
-    env_file:
-      - ./.env
-    command:
-      - /bin/bash
-      - -c
-      - NODE_NO_WARNINGS=1 npm run peer-id-gen && npm run cli start
-    volumes:
-      - type: bind
-        source: ./peer-id-goerli.json
-        target: /home/node/app/peer-id.json
-    stdin_open: true
-    tty: true
-    environment:
-      FORCE_COLOR: 1
-      NODE_NO_WARNINGS: 1
-      PROVIDER_URL: ${GOERLI_PROVIDER_URL}
-      ENCRYPTION_MNEMONIC: ${GOERLI_ENCRYPTION_MNEMONIC}
-      CHAIN_ID: 5
-      VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9002
-      LETSENCRYPT_HOST: ${DOMAIN}
-    expose:
-      - "9002"
-    depends_on:
-      - nginx-proxy
-      - acme-companion
-  
-  archaeologist-base-goerli:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
-    networks:
-      service_network:
-    profiles: ["all-networks", "base", "base-goerli"]
-    restart: on-failure
-    env_file:
-      - ./.env
-    command:
-      - /bin/bash
-      - -c
-      - NODE_NO_WARNINGS=1 npm run peer-id-gen && npm run cli start
-    volumes:
-      - type: bind
-        source: ./peer-id-base-goerli.json
-        target: /home/node/app/peer-id.json
-    stdin_open: true
-    tty: true
-    environment:
-      FORCE_COLOR: 1
-      NODE_NO_WARNINGS: 1
-      PROVIDER_URL: ${BASE_GOERLI_PROVIDER_URL}
-      ENCRYPTION_MNEMONIC: ${BASE_GOERLI_ENCRYPTION_MNEMONIC}
-      CHAIN_ID: 84531
-      VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9003
-      LETSENCRYPT_HOST: ${DOMAIN}
-    expose:
-      - "9003"
-    depends_on:
-      - nginx-proxy
-      - acme-companion
-
-  archaeologist-polygon-mumbai:
-    image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:dev
-    networks:
-      service_network:
-    profiles: ["all-networks", "polygon", "polygon-mumbai"]
-    restart: on-failure
-    env_file:
-      - ./.env
-    command:
-      - /bin/bash
-      - -c
-      - NODE_NO_WARNINGS=1 npm run peer-id-gen && npm run cli start
-    volumes:
-      - type: bind
-        source: ./peer-id-polygon-mumbai.json
-        target: /home/node/app/peer-id.json
-    stdin_open: true
-    tty: true
-    environment:
-      FORCE_COLOR: 1
-      NODE_NO_WARNINGS: 1
-      PROVIDER_URL: ${POLYGON_MUMBAI_PROVIDER_URL}
-      ENCRYPTION_MNEMONIC: ${POLYGON_MUMBAI_ENCRYPTION_MNEMONIC}
-      CHAIN_ID: 80001
-      VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 9004
-      LETSENCRYPT_HOST: ${DOMAIN}
-    expose:
-      - "9004"
-    depends_on:
-      - nginx-proxy
-      - acme-companion
-
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
+    profiles: ["service"]
     restart: on-failure
     networks: 
       service_network:
@@ -259,6 +74,7 @@ services:
     restart: on-failure
     networks:
       service_network:
+    profiles: ["service"]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - vhost:/etc/nginx/vhost.d
@@ -269,8 +85,10 @@ services:
       NGINX_PROXY_CONTAINER: "nginx-proxy"
     depends_on:
       - nginx-proxy
+  
   seed-gen:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+    profiles: ["seed-gen"]
     command:
       - /bin/bash
       - -c

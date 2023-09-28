@@ -30,12 +30,10 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
 **NOTE**:
 
-- The provider url should be a websocket url. For example, for infura, it would be `wss://mainnet.infura.io/ws/v3/<project_id>`
-- _If running on a testnet, then you will need its corresponding Testnet Tokens + Testnet SARCO._
+- Provider urls should be a websocket url. For example, for infura, it would be `wss://mainnet.infura.io/ws/v3/<project_id>`
+- _For each network you are running on, you will need its corresponding Network Tokens + Network SARCO._
 
-See [Running on multiple networks](#running-on-multiple-networks) for instructions on running on multiple networks.
-
-## Setup Instructions (for Ethereum Mainnet)
+## Setup Instructions
 
 1. Once your VPS is setup, connect to your droplet using the CLI:
 
@@ -55,9 +53,13 @@ See [Running on multiple networks](#running-on-multiple-networks) for instructio
 
    > `nano .env`
 
-   - If you do not already have one, generate a BIP39 seed: `docker compose run seed-gen`
+   **(on Encryption Mnemonic:)**
 
-   - Copy this value to your env file as `ENCRYPTION_MNEMONIC`
+   - If you do not already have one, you can generate a BIP39 seed: `COMPOSE_PROFILES=seed-gen docker compose run seed-gen`
+
+   - Copy this value to your env file.
+
+   - You will need a unique mnemonic for each network you intend to run on.
 
 6. Create blank peer ID file.
 
@@ -65,7 +67,9 @@ See [Running on multiple networks](#running-on-multiple-networks) for instructio
 
 7. **If you have not yet registered your archaeologist:**
 
-   > `docker compose run register`
+   > `COMPOSE_PROFILES=register NETWORK=<network> docker compose run register`
+
+   Replace `<network>` with a network/chain-id from your CHAIN_IDS env variable. You will need to rerun this command separately for each network indicated in your `.env` file to register yourself as an archaologist on each network.
 
    _(or `docker-compose` for older versions of docker compose)_
 
@@ -81,9 +85,11 @@ See [Running on multiple networks](#running-on-multiple-networks) for instructio
 
 8. Run the service in the background
 
-   > `docker compose up archaeologist -d`
+   > `COMPOSE_PROFILES=service NETWORK=<network> docker compose up archaeologist -d`
 
-9. You can verify your service is registered correctly by visiting https://app.dev.sarcophagus.io/archaeologists
+Replace `<network>` with a network/chain-id if you would like to run on one of your configured networks, or `all` to run on all networks indicated in your `.env` file.
+
+9. You can verify your service is registered correctly by visiting https://app.dev.sarcophagus.io/archaeologists. Make your wallet is connected to the network you are running on.
 
 - Please allow up to a minute for the archaeologist list to populate.
 
@@ -111,7 +117,10 @@ A CLI is provided for running additional commands for your service, such as upda
 
 To run the CLI:
 
-1. If the service is not started, start the service with `docker compose up archaeologist -d`,
+1. If the service is not started, start the service with `COMPOSE_PROFILES=service NETWORK=<network> docker compose up archaeologist -d`.
+
+Replace `<network>` with a network/chain-id if you would like to run on one of your configured networks, or `all` to run on all networks indicated in your `.env` file.
+
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
@@ -153,115 +162,67 @@ This will update your domain + peerID automatically
 
 ## Running on multiple networks
 
-All commands above will run your archaeologist on the Ethereum mainnet.
+To run your archaeologist node on multiple networks, you will need to:
 
-To run your archaeologist node on another network, you will need a libp2p peer ID for each network you intend to run on.
+- Set `CHAIN_IDS` to a comma-separated list of networks to run on. See `.env.example`.
+- Set the appropriate provider URLs for each network you intend to run on. See `.env.example`.
+- Set the appropriate encryption mnemonics for each network you intend to run on. See `.env.example`.
+- After configuring each network as described below, you may start the service with: `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`.
+
+Replace `<network>` with a network/chain-id, or `all` to run on all networks.
+
 The following networks are currently supported:
 
 ### Goerli
 
 - Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
-- Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-
-**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
-
-- Run `touch peer-id-goerli.json` in the root directory of this repo.
-- Run `docker compose run register-goerli` to register your archaeologist on the Goerli testnet.
-- Run `docker compose up archaeologist-goerli -d` to start the service on the Goerli testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
 
 ### Sepolia
 
 - Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
 - Make sure `SEPOLIA_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-
-**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
-
-- Run `touch peer-id-sepolia.json` in the root directory of this repo.
-- Run `docker compose run register-sepolia` to register your archaeologist on the Sepolia testnet.
-- Run `docker compose up archaeologist-sepolia -d` to start the service on the Sepolia testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=sepolia docker compose run register` to register your archaeologist on the Sepolia testnet.
 
 ### BaseGoerli
 
 - Make sure `BASE_GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate BaseGoerli provider URL.
 - Make sure `BASE_GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-
-**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
-
-- Run `touch peer-id-base-goerli.json` in the root directory of this repo.
-- Run `docker compose run register-base-goerli` to register your archaeologist on the Base Goerli testnet.
-- Run `docker compose up archaeologist-base-goerli -d` to start the service on the Base Goerli testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=baseGoerli docker compose run register` to register your archaeologist on the Base Goerli testnet.
 
 ### PolygonMumbai
 
 - Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
 - Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-
-**You should not have duplicate mnemonics!** If you do not already have one, generate one: `docker compose run seed-gen`, and copy this output into your .env file.
-
-- Run `touch peer-id-polygon-mumbai.json` in the root directory of this repo.
-- Run `docker compose run register-polygon-mumbai` to register your archaeologist on the Polygon Mumbai testnet.
-- Run `docker compose up archaeologist-polygon-mumbai -d` to start the service on the Polygon Mumbai testnet.
-
-### Targetting multiple networks:
-
-While you can individually start up on each network using the above instructions, there's also provision to run on common combinations of multiple networks at once.
-
-Remember to complete the prerequisite setup for each network you intend to run on, if you haven't done so already:
-
-- Set the appropriate provider URLs and encryption mnemonics in your `.env` file.
-- Create a peer ID file for each network you intend to run on.
-- Register your archaeologist on each network you intend to run on.
-
-#### All supported networks
-
-`COMPOSE_PROFILES=all-networks docker compose up -d`
-
-#### Ethereum Mainnet + All supported Ethereum testnets
-
-`COMPOSE_PROFILES=eth docker compose up -d`
-
-#### All supported Ethereum testnets
-
-`COMPOSE_PROFILES=eth-test docker compose up -d`
-
-#### Ethereum Mainnet + Goerli
-
-`COMPOSE_PROFILES=eth-goerli docker compose up -d`
-
-#### Ethereum Mainnet + Sepolia
-
-`COMPOSE_PROFILES=eth-sepolia docker compose up -d`
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMumbai docker compose run register` to register your archaeologist on the Polygon Mumbai
 
 ## Updating the service
 
 To update the service to the latest version:<br>
 
-> `COMPOSE_PROFILES=all-networks docker compose stop`
+> `COMPOSE_PROFILES=service docker compose stop`
 
-> `COMPOSE_PROFILES=all-networks docker compose pull`
+> `COMPOSE_PROFILES=service docker compose pull`
 
-- Start your service again using any of the methods above depending on which networks (or combination of networks) you want to run on.
+> `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
 ## Restarting the service
 
 To restart the service:<br>
 
-> `docker compose <container-selector> stop`
+> `COMPOSE_PROFILES=service docker compose stop`
 
-> `docker compose up <container-selector> -d`
-
-Replace `<container-selector>` with the name of the container you want to restart. See instructions above.
+> `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
 ## Notifications
 
-You can setup your node environment so that you can receive realtime notifications from your nodes. This is important
-if you would like to stay on top of the status of your nodes without having to remember to check in often.
+You can setup your node environment so that you can receive realtime notifications from your nodes. This is important if you would like to stay on top of the status of your nodes without having to remember to check in often.
 
 To set up notifications, set the following environment variable(s) in your `.env` file:
 
 - `NOTIFICATION_WEBHOOK_URL=<your-webhook-url>`
 
-  You follow the instructions here to set up a discord webhook url:
+  You can follow the instructions here to set up a discord webhook url:
   https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 
 Or, to get updates via email:
