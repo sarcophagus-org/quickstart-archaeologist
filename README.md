@@ -33,7 +33,7 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 - Provider urls should be a websocket url. For example, for infura, it would be `wss://mainnet.infura.io/ws/v3/<project_id>`
 - _For each network you are running on, you will need its corresponding Network Tokens + Network SARCO._
 
-## Setup Instructions (for Ethereum Mainnet)
+## Setup Instructions
 
 1. Once your VPS is setup, connect to your droplet using the CLI:
 
@@ -53,9 +53,13 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
    > `nano .env`
 
-   - If you do not already have one, you can generate a BIP39 seed: `docker compose run seed-gen`
+   **(on Encryption Mnemonic:)**
 
-   - Copy this value to your env file as `ENCRYPTION_MNEMONIC`
+   - If you do not already have one, you can generate a BIP39 seed: `COMPOSE_PROFILES=seed-gen docker compose run seed-gen`
+
+   - Copy this value to your env file.
+
+   - You will need a unique mnemonic for each network you intend to run on.
 
 6. Create blank peer ID file.
 
@@ -63,7 +67,9 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
 7. **If you have not yet registered your archaeologist:**
 
-   > `docker compose run register`
+   > `COMPOSE_PROFILES=register NETWORK=<network> docker compose run register`
+
+   Replace `<network>` with a network/chain-id from your CHAIN_IDS env variable. You will need to rerun this command separately for each network indicated in your `.env` file to register yourself as an archaologist on each network.
 
    _(or `docker-compose` for older versions of docker compose)_
 
@@ -79,7 +85,9 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
 8. Run the service in the background
 
-   > `docker compose up archaeologist -d`
+   > `COMPOSE_PROFILES=service NETWORK=<network> docker compose up archaeologist -d`
+
+Replace `<network>` with a network/chain-id if you would like to run on one of your configured networks, or `all` to run on all networks indicated in your `.env` file.
 
 9. You can verify your service is registered correctly by visiting https://app.dev.sarcophagus.io/archaeologists. Make your wallet is connected to the network you are running on.
 
@@ -109,7 +117,10 @@ A CLI is provided for running additional commands for your service, such as upda
 
 To run the CLI:
 
-1. If the service is not started, start the service with `docker compose up archaeologist -d`,
+1. If the service is not started, start the service with `COMPOSE_PROFILES=service NETWORK=<network> docker compose up archaeologist -d`.
+
+Replace `<network>` with a network/chain-id if you would like to run on one of your configured networks, or `all` to run on all networks indicated in your `.env` file.
+
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
@@ -155,31 +166,35 @@ To run your archaeologist node on multiple networks, you will need to:
 
 - Set `CHAIN_IDS` to a comma-separated list of networks to run on. See `.env.example`.
 - Set the appropriate provider URLs for each network you intend to run on. See `.env.example`.
+- Set the appropriate encryption mnemonics for each network you intend to run on. See `.env.example`.
+- After configuring each network as described below, you may start the service with: `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`.
+
+Replace `<network>` with a network/chain-id, or `all` to run on all networks.
 
 The following networks are currently supported:
 
 ### Goerli
 
 - Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
-- Run `docker compose run register-goerli` to register your archaeologist on the Goerli testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
 
 ### Sepolia
 
 - Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
 - Make sure `SEPOLIA_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `docker compose run register-sepolia` to register your archaeologist on the Sepolia testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=sepolia docker compose run register` to register your archaeologist on the Sepolia testnet.
 
 ### BaseGoerli
 
 - Make sure `BASE_GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate BaseGoerli provider URL.
 - Make sure `BASE_GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `docker compose run register-base-goerli` to register your archaeologist on the Base Goerli testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=baseGoerli docker compose run register` to register your archaeologist on the Base Goerli testnet.
 
 ### PolygonMumbai
 
 - Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
 - Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `docker compose run register-polygon-mumbai` to register your archaeologist on the Polygon Mumbai
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMumbai docker compose run register` to register your archaeologist on the Polygon Mumbai
 
 ## Updating the service
 
@@ -189,7 +204,7 @@ To update the service to the latest version:<br>
 
 > `COMPOSE_PROFILES=service docker compose pull`
 
-> `COMPOSE_PROFILES=service docker compose up -d`
+> `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
 ## Restarting the service
 
@@ -197,7 +212,7 @@ To restart the service:<br>
 
 > `COMPOSE_PROFILES=service docker compose stop`
 
-> `COMPOSE_PROFILES=service docker compose up -d`
+> `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
 ## Notifications
 
