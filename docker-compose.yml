@@ -34,7 +34,7 @@ services:
     command:
       - /bin/bash
       - -c
-      - NODE_NO_WARNINGS=1 npm run cli start --network ${NETWORK}
+      - NODE_NO_WARNINGS=1 npm run cli start -- --network ${NETWORK}
     volumes:
       - type: bind
         source: ./peer-id.json
