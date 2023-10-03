@@ -44,8 +44,7 @@ Add encryption mnemonics for any other networks you want to run your archaeologi
 ### Update your node environment by running these commands in order:
 - `COMPOSE_PROFILES=service docker compose down --remove-orphans`
 - `docker image prune`
-- `git checkout develop`
-- `git pull origin develop`
+- `git fetch origin develop && git checkout develop && git pull origin develop`
 - `COMPOSE_PROFILES=service docker compose pull`
 
 If you want to register on more networks than you were previously, see [README](./README.md#running-on-multiple-networks)
