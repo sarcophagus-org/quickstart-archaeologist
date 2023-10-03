@@ -1,17 +1,17 @@
 ### Overview
 The latest updates allow you to run your archaeologist node on multiple networks. The following networks are supported:
-ETH Mainnet  (c)
-ETH Goerli
-ETH Sepolia
-Polygon Mumbai
+- ETH Mainnet
+- ETH Goerli
+- ETH Sepolia
+- Polygon Mumbai
 
 Polygon Mainnet will be available soon.
 
-When pulling the latest archaeologist code, your `.env` file will require some changes to continue functioning.
+**Your `.env` file will require some changes for the archaeologist to function.**
 
 See the `.env.example` for the latest format of environment variables. These changes are described below.
 
-Any networks that you do not want to run on, you can leave their respective environment variables blank and remove its chain ID from the list of CHAIN_IDs.
+Any networks that you do not want to run on, you can leave their respective environment variables blank and remove the networks' chain ID(s) from the list of CHAIN_IDs.
 
 ### CHAIN_IDS
 In your `.env` file, set `CHAIN_IDS` to the chain ids of the networks you would like to run on.
