@@ -1,48 +1,61 @@
-### BEFORE updating your docker containers:
+### Overview
+The latest updates allow you to run your archaeologist node on multiple networks. The following networks are supported:
+ETH Mainnet  (c)
+ETH Goerli
+ETH Sepolia
+Polygon Mumbai
 
-- `COMPOSE_PROFILES=service docker compose down --remove-orphans`
-- `COMPOSE_PROFILES=service docker compose stop`
+Polygon Mainnet will be available soon.
 
-### Update your provider url
+When pulling the latest archaeologist code, your `.env` file will require some changes to continue functioning.
 
-The archaeologist service has been updated to use a websocket provider.
-Your provider url will need to be updated to continue running. It should now be in the `wss:://` format.
-For example, for infura mainnet, it would look like this: `wss://mainnet.infura.io/ws/v3/<your-infura-api-key>`
+See the `.env.example` for the latest format of environment variables. These changes are described below.
 
-### Set `CHAIN_IDS` environment variable
+Any networks that you do not want to run on, you can leave their respective environment variables blank and remove its chain ID from the list of CHAIN_IDs.
 
+### CHAIN_IDS
 In your `.env` file, set `CHAIN_IDS` to the chain ids of the networks you would like to run on.
-For example, if you would like to run on mainnet and goerli, you would set `CHAIN_IDS="1,5"`.
+For example, if you would like to run on ETH mainnet and ETH goerli, you would set `CHAIN_IDS="1,5"`.
 
-### Update your provider url(s)
+### PROVIDER_URLS
+See the `.env.example` for the new formatting of provider URLs.
 
-Update `PROVIDER_URL` in your `.env` file to `MAINNET_PROVIDER_URL`.
+You will need to add provider urls for any networks you want to run your archaeologist on.
 
 The archaeologist service has been updated to use a websocket provider.
 Your provider url will need to be updated to continue running. It should now be in the `wss:://` format.
 For example, for infura mainnet, it would look like this: `wss://mainnet.infura.io/ws/v3/<your-infura-api-key>`
 
-You will also need to set the provider url for each network you intend to run on.
-See `.env.example` (`cat .env.example`) for an example of how to do this.
+#### Remove PROVIDER_URL
+Your current `PROVIDER_URL` is no longer in use, this can be removed.
+
+### ENCRYPTION_MNEMONICS
+See the `.env.example` for the new formatting of encryption mnemonics.
+
+You should copy your current ENCRYPTION_MNEMONIC to the correct network mnemonic.
+For example, if you are running on mainnet, copy the ENCRYPTION_MNEMONIC value to MAINNET_ENCRYPTION_MNEMONIC
+
+The ENCRYPTION_MNEMONIC can then be removed from your `.env` file.
+
+Add encryption mnemonics for any other networks you want to run your archaeologist. 
+
+**Important note:** -- each encryption mnemonic must be unique, do not use the same mnemonic across networks.
 
 ### Update your node environment by running these commands in order:
-
+- `COMPOSE_PROFILES=service docker compose down --remove-orphans`
 - `docker image prune`
-- `git pull`
+- `git checkout develop`
+- `git pull origin develop`
 - `COMPOSE_PROFILES=service docker compose pull`
-- `docker compose up archaeologist -d`
 
-**Note:**
+If you want to register on more networks than you were previously, see [README](./README.md#running-on-multiple-networks)
+for instructions on registering on multiple networks.
 
-If you already have a node running on or registered on a testnet, you may see a warning in the logs (`docker logs <container-id> --since 10m`) about your profile not matching what is stored in the contracts.
-
-You will need to update your contracts profile to resolve this:
-
-- `docker compose exec -it archaeologist-goerli sh` (or `docker compose exec -it archaeologist-sepolia sh` for sepolia)
-- `cli update -u`
-- `exit`
+Once you are registered on all the networks you would like, run:
+`COMPOSE_PROFILES=service NETWORK=all docker compose up -d`
 
 ### Setting up notifications:
 
-The quickstart repository readme has been updated to include instructions on setting up notificatoins.
-See the heading "Notifications".
+The quickstart repository readme has been updated to include instructions on setting up optional notifications.
+See the [README](./README.md#notifications) if you would like to set these up.
+
