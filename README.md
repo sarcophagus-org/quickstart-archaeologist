@@ -97,11 +97,7 @@ Replace `<network>` with a network/chain-id if you would like to run on one of y
 
 ### To view the logs
 
-Run `docker ps` and grab the container ID of the archaeologist service. Look under the `NAMES` column.
-
-To identify the relevant container, look for the container with the name format: `<directory-name>-archaeologist-<network-name>-1`.
-
-Example, to get the container ID for the archaeologist service running on the Ethereum mainnet, and if you cloned this repo into the default directory called `quickstart-archaeologist`, you would look for a container with the name `quickstart-archaeologist-archaeologist-1`.
+Run `docker ps` and grab the container ID of the archaeologist service. Look under the `NAMES` column. Your archaeologist docker container should have the name format: `<directory-name>-archaeologist-1`.
 
 Run `docker logs <container-id> --follow` to see realtime logs
 
@@ -124,6 +120,10 @@ Replace `<network>` with a network/chain-id if you would like to run on one of y
 2. Jump into the container with: `docker compose exec -it archaeologist sh`
 3. Run `cli help` for available commands, or `cli help <command>` for help with a given command.
 
+For each CLI command, you may choose to omit the `--network <network>` flag if your node is running on just one network.
+
+If running on more than one network, you will need to specify the network you would like to run the CLI command on.
+
 #### Examples
 
 You will need to jump into the container to run these commands: `docker compose exec -it archaeologist sh`
@@ -132,31 +132,31 @@ You will need to jump into the container to run these commands: `docker compose 
 
 This will update your domain + peerID automatically
 
-> `cli update -u`
+> `cli update -u --network <network>`
 
 > `exit`
 
 **Deposit 100 SARCO to free bond**
 
-> `cli update -f 100`
+> `cli update -f 100 --network <network>`
 
 > `exit`
 
 **View Profile**
 
-> `cli view -p`
+> `cli view -p --network <network>`
 
 > `exit`
 
 **Claim Rewards**
 
-> `cli claim`
+> `cli claim --network <network>`
 
 > `exit`
 
 **Withdraw 5 SARCO from Free Bond**
 
-> `cli free-bond -w 5`
+> `cli free-bond -w 5 --network <network>`
 
 > `exit`
 
@@ -176,6 +176,7 @@ The following networks are currently supported:
 ### Goerli
 
 - Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
+- Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
 - Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
 
 ### Sepolia
@@ -267,7 +268,7 @@ To get your domain and peerID, run:
 
 > `docker compose exec -it archaeologist sh`
 
-> `cli view -p`
+> `cli view -p --network <network>`
 
 The `PeerId` has the domain and libp2p peerID concatenated with a `:`. So the format is: `<domain>:<peerID>`.
 
@@ -277,7 +278,7 @@ An example would look like:
 
 ### Archaeologist not showing in the web application
 
-1. Ensure you have registered your archaeologist (see setup instructions).
+1. Ensure you have registered your archaeologist on the correct network (see setup instructions).
 2. Make sure your free bond is larger than your minimum digging fee. You will not show up in the web application if you do not have enough free bond posted to accept new jobs.
 3. Ensure your domain is pointed at the IP address of your server using:
 4. See if any errors appear in the logs of either your archaeologist service, or the SSL service
