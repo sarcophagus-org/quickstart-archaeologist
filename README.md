@@ -37,21 +37,21 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
 1. Once your VPS is setup, connect to your droplet using the CLI:
 
-   > `ssh root@>droplet-ip<`
+   - `ssh root@>droplet-ip<`
 
 2. Once logged into your VPS droplet, you will need to 'apt-get install' git, docker, and docker-compose
 
 3. Once setup is complete, Clone this repo:
 
-   > `git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
+   - `git clone https://github.com/sarcophagus-org/quickstart-archaeologist && cd quickstart-archaeologist`
 
 4. Copy example env file.
 
-   > `cp .env.example .env`
+   - `cp .env.example .env`
 
 5. Fill out the `.env` file values. _warning: do not alter the name of the file or it will not be recognized_
 
-   > `nano .env`
+   - `nano .env`
 
    **(on Encryption Mnemonic:)**
 
@@ -63,11 +63,11 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
 6. Create blank peer ID file.
 
-   > `touch peer-id.json`
+   - `touch peer-id.json`
 
 7. **If you have not yet registered your archaeologist:**
 
-   > `COMPOSE_PROFILES=register NETWORK=<network> docker compose run register`
+   - `COMPOSE_PROFILES=register NETWORK=<network> docker compose run register`
 
    Replace `<network>` with a network/chain-id from your CHAIN_IDS env variable. You will need to rerun this command separately for each network indicated in your `.env` file to register yourself as an archaologist on each network.
 
@@ -85,7 +85,7 @@ _For Windows users, steps are the same, but install GitBash (or similar) for a C
 
 8. Run the service in the background
 
-   > `COMPOSE_PROFILES=service NETWORK=<network> docker compose up archaeologist -d`
+   - `COMPOSE_PROFILES=service NETWORK=<network> docker compose up archaeologist -d`
 
 Replace `<network>` with a network/chain-id if you would like to run on one of your configured networks, or `all` to run on all networks indicated in your `.env` file.
 
@@ -130,35 +130,29 @@ You will need to jump into the container to run these commands: `docker compose 
 
 **Update Profile**
 
-This will update your domain + peerID automatically
+- `cli update -u --network <network>`
 
-> `cli update -u --network <network>`
-
-> `exit`
+_This will update your domain + peerID automatically._
 
 **Deposit 100 SARCO to free bond**
 
-> `cli update -f 100 --network <network>`
-
-> `exit`
+- `cli update -f 100 --network <network>`
 
 **View Profile**
 
-> `cli view -p --network <network>`
-
-> `exit`
+- `cli view -p --network <network>`
 
 **Claim Rewards**
 
-> `cli claim --network <network>`
-
-> `exit`
+- `cli claim --network <network>`
 
 **Withdraw 5 SARCO from Free Bond**
 
-> `cli free-bond -w 5 --network <network>`
+- `cli free-bond -w 5 --network <network>`
 
-> `exit`
+**Exit the CLI**
+
+- `exit`
 
 ## Running on multiple networks
 
@@ -201,19 +195,19 @@ The following networks are currently supported:
 
 To update the service to the latest version:<br>
 
-> `COMPOSE_PROFILES=service docker compose stop`
+- `COMPOSE_PROFILES=service docker compose stop`
 
-> `COMPOSE_PROFILES=service docker compose pull`
+- `COMPOSE_PROFILES=service docker compose pull`
 
-> `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
+- `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
 ## Restarting the service
 
 To restart the service:<br>
 
-> `COMPOSE_PROFILES=service docker compose stop`
+- `COMPOSE_PROFILES=service docker compose stop`
 
-> `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
+- `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
 ## Notifications
 
@@ -246,7 +240,7 @@ Ports 443 and 80 must be open on your server.
 
 If using Uncomplicated Firewall on linux, you can use the following to open these ports:
 
-> `sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable`
+- `sudo ufw allow 443/tcp; sudo ufw allow 80/tcp; sudo ufw enable`
 
 ### Domain A Record
 
@@ -262,19 +256,19 @@ https://www.piesocket.com/websocket-tester
 
 Test that your archaeologist can have websocket connection open by entering your websocket address in this format:
 
-> `wss://<domain>/p2p/<libp2p peerID>`
+- `wss://<domain>/p2p/<libp2p peerID>`
 
 To get your domain and peerID, run:
 
-> `docker compose exec -it archaeologist sh`
+- `docker compose exec -it archaeologist sh`
 
-> `cli view -p --network <network>`
+- `cli view -p --network <network>`
 
 The `PeerId` has the domain and libp2p peerID concatenated with a `:`. So the format is: `<domain>:<peerID>`.
 
 An example would look like:
 
-> `wss://wss.encryptafile.com/p2p/12D3KooWNpTFhjxvvKhzi6AiKk7ByroGpQ8YKXAy85oLJnrfjCst`
+- `wss://wss.encryptafile.com/p2p/12D3KooWNpTFhjxvvKhzi6AiKk7ByroGpQ8YKXAy85oLJnrfjCst`
 
 ### Archaeologist not showing in the web application
 
@@ -285,12 +279,12 @@ An example would look like:
 
 **Archaeologist Logs**
 
-> `docker ps` // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
+- `docker ps` // get container ID of ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
 
-> `docker logs <container_id>`
+- `docker logs <container_id>`
 
 **SSL cert logs**
 
-> `docker ps` // get container ID of nginxproxy/acme-companion
+- `docker ps` // get container ID of nginxproxy/acme-companion
 
-> `docker logs <container_id>`
+- `docker logs <container_id>`
