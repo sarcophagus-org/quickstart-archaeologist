@@ -165,7 +165,14 @@ To run your archaeologist node on multiple networks, you will need to:
 
 Replace `<network>` with a network/chain-id, or `all` to run on all networks.
 
-The following networks are currently supported:
+The following networks are currently supported (_with network name/chain id to use in place of `<network>` placeholder_):
+
+- **ETH Mainnet:** `1` or `mainnet`
+- **ETH Goerli:** `5` or `goerli`
+- **ETH Sepolia:** `11155111` or `sepolia`
+- **Base Goerli:** `84531` or `baseGoerli`
+- **Polygon Mainnet:** `137` or `polygonMainnet`
+- **Polygon Mumbai:** `80001` or `polygonMumbai`
 
 ### Ethereum Mainnet
 
@@ -173,13 +180,13 @@ The following networks are currently supported:
 - Make sure `MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
 - Run `COMPOSE_PROFILES=register NETWORK=mainnet docker compose run register` to register your archaeologist on the Ethereum mainnet network.
 
-### Goerli
+### ETH Goerli
 
 - Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
 - Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
 - Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
 
-### Sepolia
+### ETH Sepolia
 
 - Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
 - Make sure `SEPOLIA_ENCRYPTION_MNEMONIC` is set in your `.env` file.
@@ -195,7 +202,7 @@ The following networks are currently supported:
 
 - Make sure `POLYGON_MAINNET_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMainnet provider URL.
 - Make sure `POLYGON_MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=polygon docker compose run register` to register your archaeologist on the Polygon Mainnet network.
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMainnet docker compose run register` to register your archaeologist on the Polygon Mainnet network.
 
 ### Polygon Mumbai
 
