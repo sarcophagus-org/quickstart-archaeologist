@@ -163,9 +163,21 @@ To run your archaeologist node on multiple networks, you will need to:
 - Set the appropriate encryption mnemonics for each network you intend to run on. See `.env.example`.
 - After configuring each network as described below, you may start the service with: `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`.
 
-Replace `<network>` with a network/chain-id, or `all` to run on all networks.
+Replace `<network>` with a network/chain-id, or `all` to run on all networks included in your .env file.
 
 The following networks are currently supported:
+
+### EthereumMainnet
+
+- Make sure `MAINNET_PROVIDER_URL` is set in your `.env` file to an appropriate Ethereum provider URL.
+- Make sure `MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=mainnet docker compose run register` to register your archaeologist on the Ethereum Mainnet.
+
+### PolygonMainnet
+
+- Make sure `POLYGON_MAINNET_PROVIDER_URL` is set in your `.env` file to an appropriate Polygon provider URL.
+- Make sure `POLYGON_MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=polygon_mainnet docker compose run register` to register your archaeologist on the Polygon Mainnet.
 
 ### Goerli
 
@@ -201,6 +213,10 @@ To update the service to the latest version:<br>
 
 - `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
 
+or to start multiple at the same time:
+
+- `COMPOSE_PROFILES=service NETWORK=all docker compose up -d`
+
 ## Restarting the service
 
 To restart the service:<br>
@@ -208,6 +224,10 @@ To restart the service:<br>
 - `COMPOSE_PROFILES=service docker compose stop`
 
 - `COMPOSE_PROFILES=service NETWORK=<network> docker compose up -d`
+
+or to start multiple at the same time:
+
+- `COMPOSE_PROFILES=service NETWORK=all docker compose up -d`
 
 ## Notifications
 
