@@ -7,13 +7,13 @@ The latest updates allow you to run your archaeologist node on multiple networks
 - Polygon Mumbai (chain: 80001)
 
 ## Index
-[1. Env File Updates](#env-file-updates)
+1. [Env File Updates](#env-file-updates)
 
-[2. Update your Archaeologist](#update-your-archaeologist)
+2. [Update your Archaeologist](#update-your-archaeologist)
 
-[3. Register your Archaeologist](#register-your-archaeologist)
+3. [Register your Archaeologist](#register-your-archaeologist)
 
-[4. Start Your Archaeologist](#start-your-archaeologist)
+4. [Start Your Archaeologist](#start-your-archaeologist)
 
 ## ENV File Updates
 **Your `.env` file will require some changes for the archaeologist to function.**
@@ -69,7 +69,7 @@ You do not need to re-register your archaeologist on any networks your are curre
 
 **To register:**
 ```
-`COMPOSE_PROFILES=register NETWORK=<network> docker compose run register`
+COMPOSE_PROFILES=register NETWORK=<network> docker compose run register
 
 // `<network>` is the network you would like to register. Available networks are:
 mainnet
