@@ -167,25 +167,31 @@ Replace `<network>` with a network/chain-id, or `all` to run on all networks.
 
 The following networks are currently supported:
 
-### Goerli
+### Eth Mainnet
 
 - Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
 - Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
 - Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
 
-### Sepolia
+### Polygon Mainnet
+
+- Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
+- Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMumbai docker compose run register` to register your archaeologist on the Polygon Mumbai
+
+### Eth Goerli (testnet)
+
+- Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
+- Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
+
+### Eth Sepolia (testnet)
 
 - Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
 - Make sure `SEPOLIA_ENCRYPTION_MNEMONIC` is set in your `.env` file.
 - Run `COMPOSE_PROFILES=register NETWORK=sepolia docker compose run register` to register your archaeologist on the Sepolia testnet.
 
-### BaseGoerli
-
-- Make sure `BASE_GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate BaseGoerli provider URL.
-- Make sure `BASE_GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=baseGoerli docker compose run register` to register your archaeologist on the Base Goerli testnet.
-
-### PolygonMumbai
+### Polygon Mumbai (testnet)
 
 - Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
 - Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.

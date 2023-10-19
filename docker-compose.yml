@@ -47,6 +47,7 @@ services:
       VIRTUAL_HOST: ${DOMAIN}
       VIRTUAL_PORT: 9000
       LETSENCRYPT_HOST: ${DOMAIN}
+      NETWORK: "all"
     expose:
       - "9000"
     depends_on:
