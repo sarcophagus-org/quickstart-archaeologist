@@ -177,7 +177,7 @@ The following networks are currently supported:
 
 - Make sure `POLYGON_MAINNET_PROVIDER_URL` is set in your `.env` file to an appropriate Polygon provider URL.
 - Make sure `POLYGON_MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=polygon docker compose run register` to register your archaeologist on the Polygon Mainnet.
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMainnet docker compose run register` to register your archaeologist on the Polygon Mainnet.
 
 ### Eth Goerli (testnet)
 
