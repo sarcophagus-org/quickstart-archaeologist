@@ -169,15 +169,15 @@ The following networks are currently supported:
 
 ### Eth Mainnet
 
-- Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
-- Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
+- Make sure `MAINNNET_PROVIDER_URL` is set in your `.env` file to an appropriate mainnet provider URL.
+- Make sure `MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=mainnet docker compose run register` to register your archaeologist on the Ethereum Mainnet.
 
 ### Polygon Mainnet
 
-- Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
-- Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=polygonMumbai docker compose run register` to register your archaeologist on the Polygon Mumbai
+- Make sure `POLYGON_MAINNET_PROVIDER_URL` is set in your `.env` file to an appropriate Polygon provider URL.
+- Make sure `POLYGON_MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=polygon docker compose run register` to register your archaeologist on the Polygon Mainnet.
 
 ### Eth Goerli (testnet)
 
