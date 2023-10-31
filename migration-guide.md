@@ -18,7 +18,7 @@ The latest updates allow you to run your archaeologist node on multiple networks
 **Your `.env` file will require some changes for the archaeologist to function.**
 
 ```
-// Pull latest main branch + pull newest package data
+// Pull latest main branch to get latest code
 git pull origin main
 ```
 
