@@ -54,11 +54,10 @@ Add encryption mnemonics for any other networks you want to run your archaeologi
 COMPOSE_PROFILES=service docker compose down --remove-orphans
 docker image prune
 
-// Checkout develop branch + pull newest package data
-git fetch origin develop && git checkout develop && git pull origin develop
+// Pull latest main branch + pull newest package data
+git pull origin main
 COMPOSE_PROFILES=service docker compose pull
 ```
-
 
 ## Register your Archaeologist
 You can now register your archaeologist on multiple networks. 
