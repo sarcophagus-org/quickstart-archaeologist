@@ -17,7 +17,12 @@ The latest updates allow you to run your archaeologist node on multiple networks
 ## ENV File Updates
 **Your `.env` file will require some changes for the archaeologist to function.**
 
-See the `.env.example` for the latest format of environment variables. These changes are described below.
+```
+// Pull latest main branch + pull newest package data
+git pull origin main
+```
+
+After pulling the `main` branch, see the `.env.example` for the latest format of environment variables. These changes are described below.
 
 Any networks that you do not want to run on, you can leave their respective environment variables blank and remove the networks' chain ID(s) from the list of CHAIN_IDs.
 
@@ -54,8 +59,7 @@ Add encryption mnemonics for any other networks you want to run your archaeologi
 COMPOSE_PROFILES=service docker compose down --remove-orphans
 docker image prune
 
-// Pull latest main branch + pull newest package data
-git pull origin main
+// pull latest node package
 COMPOSE_PROFILES=service docker compose pull
 ```
 
