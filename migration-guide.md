@@ -1,11 +1,11 @@
-## Overview
+# Overview
 The latest updates allow you to run your archaeologist node on multiple networks. The following networks are supported:
 - ETH Mainnet  (chain: 1)
 - Polygon Mainnet (chain: 137)
 - ETH Sepolia (chain: 11155111)
 - Polygon Mumbai (chain: 80001)
 
-## Index
+# Index
 1. [Env File Updates](#env-file-updates)
 
 2. [Update your Archaeologist](#update-your-archaeologist)
@@ -14,7 +14,7 @@ The latest updates allow you to run your archaeologist node on multiple networks
 
 4. [Start Your Archaeologist](#start-your-archaeologist)
 
-## ENV File Updates
+# ENV File Updates
 **Your `.env` file will require some changes for the archaeologist to function.**
 
 ```
@@ -53,7 +53,7 @@ Add encryption mnemonics for any other networks you want to run your archaeologi
 
 **Important note:** -- each encryption mnemonic must be unique, do not use the same mnemonic across networks.
 
-## Update your Archaeologist
+# Update your Archaeologist
 ```
 // Destroy + Clean docker images
 COMPOSE_PROFILES=service docker compose down --remove-orphans
@@ -63,7 +63,7 @@ docker image prune
 COMPOSE_PROFILES=service docker compose pull
 ```
 
-## Register your Archaeologist
+# Register your Archaeologist
 You can now register your archaeologist on multiple networks. 
 
 You do not need to re-register your archaeologist on any networks your are currently registered on.
@@ -80,7 +80,7 @@ sepolia
 polygonMumbai
 ```
 
-## Start your Archaeologist
+# Start your Archaeologist
 ```
 // All networks - excluding network flag will automatically run all networks added to CHAIN_IDS
 `COMPOSE_PROFILES=service docker compose run up -d`
@@ -89,6 +89,6 @@ polygonMumbai
 `COMPOSE_PROFILES=service NETWORK=<network> docker compose run up -d`
 ```
 
-### Setting up notifications:
+# Notifications:
 The quickstart repository readme has been updated to include instructions on setting up optional notifications.
 See the [README](./README.md#notifications) if you would like to set these up.
