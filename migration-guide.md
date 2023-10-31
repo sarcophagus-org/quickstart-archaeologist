@@ -2,7 +2,6 @@
 The latest updates allow you to run your archaeologist node on multiple networks. The following networks are supported:
 - ETH Mainnet  (chain: 1)
 - Polygon Mainnet (chain: 137)
-- ETH Goerli  (chain: 5)
 - ETH Sepolia (chain: 11155111)
 - Polygon Mumbai (chain: 80001)
 
@@ -74,14 +73,13 @@ COMPOSE_PROFILES=register NETWORK=<network> docker compose run register
 // `<network>` is the network you would like to register. Available networks are:
 mainnet
 polygonMainnet
-goerli
 sepolia
 polygonMumbai
 ```
 
 ## Start your Archaeologist
 ```
-// All networks
+// All networks - excluding network flag will automatically run all networks added to CHAIN_IDS
 `COMPOSE_PROFILES=service docker compose run up -d`
 
 // Single Network
