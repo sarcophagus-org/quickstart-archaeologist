@@ -179,12 +179,6 @@ The following networks are currently supported:
 - Make sure `POLYGON_MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
 - Run `COMPOSE_PROFILES=register NETWORK=polygonMainnet docker compose run register` to register your archaeologist on the Polygon Mainnet.
 
-### Eth Goerli (testnet)
-
-- Make sure `GOERLI_PROVIDER_URL` is set in your `.env` file to an appropriate goerli provider URL.
-- Make sure `GOERLI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=goerli docker compose run register` to register your archaeologist on the Goerli testnet.
-
 ### Eth Sepolia (testnet)
 
 - Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
