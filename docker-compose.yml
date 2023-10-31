@@ -12,7 +12,7 @@ services:
       - -c
       - |
         npm run peer-id-gen
-        NODE_NO_WARNINGS=1 npm run cli register -- -g
+        NODE_NO_WARNINGS=1 npm run cli register -- -g --network ${NETWORK}
     volumes:
       - type: bind
         source: ./peer-id.json
@@ -22,7 +22,6 @@ services:
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
-      CHAIN_ID: 1
 
   archaeologist:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
@@ -35,7 +34,7 @@ services:
     command:
       - /bin/bash
       - -c
-      - NODE_NO_WARNINGS=1 npm run cli start
+      - NODE_NO_WARNINGS=1 npm run cli start -- --network ${NETWORK}
     volumes:
       - type: bind
         source: ./peer-id.json
@@ -45,10 +44,10 @@ services:
     environment:
       FORCE_COLOR: 1
       NODE_NO_WARNINGS: 1
-      CHAIN_ID: 1
       VIRTUAL_HOST: ${DOMAIN}
       VIRTUAL_PORT: 9000
       LETSENCRYPT_HOST: ${DOMAIN}
+      NETWORK: "all"
     expose:
       - "9000"
     depends_on:
@@ -73,10 +72,10 @@ services:
 
   acme-companion:
     image: nginxproxy/acme-companion
-    profiles: ["service"]
     restart: on-failure
     networks:
       service_network:
+    profiles: ["service"]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - vhost:/etc/nginx/vhost.d
@@ -87,9 +86,10 @@ services:
       NGINX_PROXY_CONTAINER: "nginx-proxy"
     depends_on:
       - nginx-proxy
+  
   seed-gen:
     image: ghcr.io/sarcophagus-org/sarcophagus-v2-archaeologist-service:latest
-    profiles: [ "seed" ]
+    profiles: ["seed-gen"]
     command:
       - /bin/bash
       - -c
