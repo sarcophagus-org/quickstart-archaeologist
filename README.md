@@ -171,25 +171,31 @@ The following networks are currently supported:
 
 - Make sure `MAINNNET_PROVIDER_URL` is set in your `.env` file to an appropriate mainnet provider URL.
 - Make sure `MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=mainnet docker compose run register` to register your archaeologist on the Ethereum Mainnet.
+- Run `COMPOSE_PROFILES=register NETWORK=mainnet docker compose run register` to register your archaeologist on Ethereum Mainnet.
 
 ### Polygon Mainnet
 
 - Make sure `POLYGON_MAINNET_PROVIDER_URL` is set in your `.env` file to an appropriate Polygon provider URL.
 - Make sure `POLYGON_MAINNET_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=polygonMainnet docker compose run register` to register your archaeologist on the Polygon Mainnet.
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMainnet docker compose run register` to register your archaeologist on Polygon Mainnet.
+
+### Arbitrum One
+
+- Make sure `ARBITRUM_PROVIDER_URL` is set in your `.env` file to an appropriate Polygon provider URL.
+- Make sure `ARBITRUM_ENCRYPTION_MNEMONIC` is set in your `.env` file.
+- Run `COMPOSE_PROFILES=register NETWORK=arbitrum docker compose run register` to register your archaeologist on Arbitrum One.
 
 ### Eth Sepolia (testnet)
 
 - Make sure `SEPOLIA_PROVIDER_URL` is set in your `.env` file to an appropriate sepolia provider URL.
 - Make sure `SEPOLIA_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=sepolia docker compose run register` to register your archaeologist on the Sepolia testnet.
+- Run `COMPOSE_PROFILES=register NETWORK=sepolia docker compose run register` to register your archaeologist on Sepolia testnet.
 
 ### Polygon Mumbai (testnet)
 
 - Make sure `POLYGON_MUMBAI_PROVIDER_URL` is set in your `.env` file to an appropriate PolygonMumbai provider URL.
 - Make sure `POLYGON_MUMBAI_ENCRYPTION_MNEMONIC` is set in your `.env` file.
-- Run `COMPOSE_PROFILES=register NETWORK=polygonMumbai docker compose run register` to register your archaeologist on the Polygon Mumbai
+- Run `COMPOSE_PROFILES=register NETWORK=polygonMumbai docker compose run register` to register your archaeologist on Polygon Mumbai.
 
 ## Updating the service
 

@@ -75,6 +75,7 @@ mainnet
 polygonMainnet
 sepolia
 polygonMumbai
+arbitrum
 ```
 
 ## Start your Archaeologist
